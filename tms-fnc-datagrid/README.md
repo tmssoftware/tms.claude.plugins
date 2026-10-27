@@ -38,3 +38,4 @@ Helps Delphi developers get productive with **TMS FNC DataGrid** (`TTMSFNCDataGr
 - Documentation: [TMS FNC DataGrid](https://doc.tmssoftware.com/fnc/uipack/datagrid/index.html) · [Getting started](https://doc.tmssoftware.com/fnc/uipack/datagrid/getting-started.html) · [API reference](https://doc.tmssoftware.com/fnc/uipack/api/ttmsfncdatagrid/index.html)
 - Support: [TMS Support Center – FNC](https://support.tmssoftware.com/c/fnc)
 - Source of this plugin: [tmssoftware/tms.claude.plugins](https://github.com/tmssoftware/tms.claude.plugins)
+- Privacy: [plugin privacy policy](PRIVACY.md). The plugin collects no data.
