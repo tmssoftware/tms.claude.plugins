@@ -31,3 +31,10 @@ Helps Delphi developers get productive with **TMS FNC DataGrid** (`TTMSFNCDataGr
 
 - Excel export (`TTMSFNCDataGridExcelIO`) is available for VCL and FMX only and writes `.xls`. By default it leaves out the header row and first column; the plugin sets `DataGridStartRow`/`DataGridStartCol` to 0 to export everything.
 - The StellarDS dataset shown in some demos comes from TMS FNC Cloud Pack.
+
+## Links
+
+- Product page: [TMS FNC UI Pack](https://www.tmssoftware.com/site/tmsfncuipack.asp)
+- Documentation: [TMS FNC DataGrid](https://doc.tmssoftware.com/fnc/uipack/datagrid/index.html) · [Getting started](https://doc.tmssoftware.com/fnc/uipack/datagrid/getting-started.html) · [API reference](https://doc.tmssoftware.com/fnc/uipack/api/ttmsfncdatagrid/index.html)
+- Support: [TMS Support Center – FNC](https://support.tmssoftware.com/c/fnc)
+- Source of this plugin: [tmssoftware/tms.claude.plugins](https://github.com/tmssoftware/tms.claude.plugins)
