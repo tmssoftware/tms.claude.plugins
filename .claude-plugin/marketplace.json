@@ -1,0 +1,24 @@
+{
+  "name": "tms-software",
+  "owner": {
+    "name": "TMS Software",
+    "url": "https://www.tmssoftware.com"
+  },
+  "metadata": {
+    "description": "Claude plugins for TMS Software developer products.",
+    "version": "0.1.1"
+  },
+  "plugins": [
+    {
+      "name": "tms-fnc-datagrid",
+      "source": "./plugins/tms-fnc-datagrid",
+      "description": "Get started with TMS FNC DataGrid in Delphi (VCL, FMX, TMS WEB Core), unlock advanced features like grouping, filtering, conditional formatting, database binding and export, and review grid code against the real API.",
+      "version": "0.1.1",
+      "author": { "name": "TMS Software" },
+      "homepage": "https://www.tmssoftware.com",
+      "license": "LicenseRef-TMS-Software-Proprietary",
+      "category": "development",
+      "keywords": ["delphi", "tms", "fnc", "datagrid", "vcl", "fmx", "web-core"]
+    }
+  ]
+}
