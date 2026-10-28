@@ -34,6 +34,8 @@ Every `Add*(AColumn, ARow ...)` also has an `(ACell: TTMSFNCDataGridCellCoord ..
 **"Data" vs plain variants** (key distinction):
 - `AddCheckBox` / `AddRadioButton`: checked state stored **separately** from the cell value; read/write via `Booleans[C, R]`.
 - `AddDataCheckBox` / `AddDataRadioButton`: state **follows the cell value** (use for Boolean data / dataset fields).
+- A data checkbox still draws the value's text (`True` / `False`) behind the checkbox. To show only the checkbox, hide the text in `OnGetCellLayout` with `ACell.Layout.Font.Color := TAlphaColors.Null` (VCL: `gcNull`) for that column's data rows, or in `OnBeforeDrawCell` with `ACell.DrawElements := ACell.DrawElements - [gcdText]`. Don't blank the value or the display text, because that breaks the checkbox state, sorting and the filter drop-down. See `styling.md`.
+- A progress-bar cell is a full-cell control and covers the cell's text. For "number plus a bar" use a conditional-formatting data bar (`ConditionalFormatting.AddDataBar`, `DataBar.ShowValue = True`) instead.
 - `AddProgressBar`: position stored separately in `ProgressValue[C, R]: Integer`.
 - `AddDataProgressBar`: position is the numeric cell value (`Ints[C, R]`).
 
@@ -189,4 +191,5 @@ For database master/detail, use the database adapter (see database.md), not AddG
 - Setting `Columns[i].Type`/`Editor` at runtime without `AddSetting` — has no effect on cells.
 - Reading `Booleans[]` for an `AddDataCheckBox` and expecting it independent of the cell value — data variants follow the value.
 - Freeing the renderer returned by `AddGrid` — owned by the cell.
+- "True"/"False" showing next to a data checkbox — hide the text (`Font.Color := TAlphaColors.Null` or `DrawElements - [gcdText]`), not the value.
 - Assigning a `TLabel`/`TImage` to `Controls[]` in VCL — needs a `TWinControl`.

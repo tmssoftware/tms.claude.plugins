@@ -9,7 +9,7 @@ description: >
   bind to a database, or export a TMS FNC data grid. Read it before writing or reviewing any TMS FNC DataGrid code,
   because the real API differs from TStringGrid, TAdvStringGrid and the older TTMSFNCGrid.
 metadata:
-  version: "0.1.0"
+  version: "0.1.3"
 ---
 
 # TMS FNC DataGrid API knowledge
@@ -39,6 +39,10 @@ TTMSFNCDataGrid is the data grid in the TMS FNC UI Pack (product id `tms.fnc.uip
 11. Database binding direction: `Grid.Adapter := Adapter; Adapter.DataSource := DataSource;`. There is no `Grid.DataSource` and no `Adapter.Grid`. Edits aren't posted until the record changes or `Adapter.DataSetPost` is called. The default `LoadMode` (`almBuffered`) disables in-grid grouping and multi-column sorting; use `almAllRecords` for those.
 12. Export uses separate components linked through their `DataGrid` property: `TTMSFNCDataGridPDFIO.Save`, `TTMSFNCDataGridExcelIO.XLSExport` (VCL/FMX only, `.xls`), `TTMSFNCDataGridPrintIO.Print`. There is no `Grid.ExportToPDF` / `SaveToXLS`. The `TTMSFNCGrid...IO` classes are for the older grid. Excel export skips grid row 0 (the column captions) and column 0 by default (`DataGridStartRow` / `DataGridStartCol` = 1). Set both to `0` to export the whole grid.
 13. In WEB, `LoadFromCSVData` loads asynchronously, so code that runs straight after it may see no data.
+14. On the grid, `GroupAverage(AColumn)` has **no** callback parameter. For a formatted average use `GroupAverage([AColumn], ACallback)`. Assign every anonymous callback (group text, calculation options) to a **typed variable** before passing it to an overloaded `Group*` method; inline anonymous methods trigger "no overloaded version" errors.
+15. Display text is computed when a value is written. Assign `OnGetCellFormatting` / `OnGetCellDisplayValue` and column formats **before** filling the grid, and set `FormatSettings` separators at startup when a fixed number format (e.g. `€ 12,345.00`) is required. Otherwise the Windows locale decides.
+16. A data checkbox column still draws `True`/`False` behind the checkbox. Hide the text (`ACell.Layout.Font.Color := TAlphaColors.Null` in `OnGetCellLayout`), never the value.
+17. For a styled or "dashboard" grid, start from the recipe in `references/styling.md` instead of discovering layout properties one build at a time. To check the look, have the app save an image of itself. Never capture the user's whole desktop.
 
 ## Reference files
 
@@ -46,8 +50,9 @@ Read the file(s) for the task at hand. Don't load all of them.
 
 | File | Covers |
 |---|---|
-| `references/setup-and-install.md` | Product/package, TMS Smart Setup install commands, palette page, uses clauses per framework, creating the grid in code, WEB Core specifics |
+| `references/setup-and-install.md` | Product/package, TMS Smart Setup install commands, palette page, uses clauses per framework, creating the grid in code, a minimal `.dproj` + `build.cmd` for command-line builds, WEB Core specifics |
 | `references/core-api.md` | Class structure, data access, rows/columns, column settings, appearance, selection, key events |
+| `references/styling.md` | Dashboard look in one pass: state layouts, per-cell layout, locale-proof number/date formats, checkbox and data-bar columns, checking the look safely |
 | `references/editing.md` | Editing options, editors per column, validation, AutoFill, clipboard |
 | `references/sorting-filtering.md` | Sorting (multi-column, custom compare), filtering API and UI |
 | `references/filter-row.md` | Filter row setup and filter editor controls |

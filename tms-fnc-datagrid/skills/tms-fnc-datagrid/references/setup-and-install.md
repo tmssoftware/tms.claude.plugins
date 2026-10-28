@@ -117,6 +117,63 @@ Index order is always **column first, then row**: `Cells[ACol, ARow]`, `Layouts[
 
 Verified helpers used in the demos: `LoadSampleData`, `RandomFill(ADoFixed: Boolean = False; ARandomNumber: Integer = 100)`, `AutoSizeColumns(const AMode: TTMSFNCDataGridAutoSizeMode = gamAllCells; const APadding: Integer = 5)`, `AutoSizeGrid(...)`, `ColumnWidths[AColumn]: Double`, `LoadFromCSVData(AFileName: string)`, `SaveToCSVData(AFileName: string)`, `ScrollMode := gsmCellScrolling` (default `gsmPixelScrolling`).
 
+## Building from the command line (new project)
+
+When you create a project yourself and build it with `msbuild`, a hand-written `.dproj` often fails before any grid code compiles:
+- `F2613 Unit 'Windows' not found` / `'System.SysUtils' not found`: the `.dproj` has no `DCC_Namespace`, so unit scope names aren't resolved.
+- `File not found: 'FMX.TMSFNCDataGrid.dcu'` / `'FMX.TMSFNCDataGridExcelIO'`: the build doesn't see the IDE library path. This happens when msbuild runs as another user or in a sandbox, where the IDE's registry settings aren't available.
+
+This minimal FMX `.dproj` builds with `msbuild` without relying on the IDE's library path. Replace `<UIPACK>` and `<CORE>` with the `Source` folders of the installed `tms.fnc.uipack` and `tms.fnc.core`, and `MainForm.pas` with your units. The IDE upgrades the file when you open it.
+
+```xml
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{00000000-0000-0000-0000-000000000001}</ProjectGuid>
+    <ProjectVersion>20.3</ProjectVersion>
+    <FrameworkType>FMX</FrameworkType>
+    <MainSource>MyApp.dpr</MainSource>
+    <Base>True</Base>
+    <Config Condition="'$(Config)'==''">Debug</Config>
+    <Platform Condition="'$(Platform)'==''">Win32</Platform>
+    <TargetedPlatforms>1</TargetedPlatforms>
+    <AppType>Application</AppType>
+    <DCC_Namespace>Winapi;System.Win;Data.Win;System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+    <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+    <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
+    <DCC_DcuSearchPath>$(BDS)\lib\$(Platform)\release;$(DCC_DcuSearchPath)</DCC_DcuSearchPath>
+    <DCC_UnitSearchPath><UIPACK>;<UIPACK>\xlsAdapter;<CORE>;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+    <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+    <DCC_Optimize>false</DCC_Optimize>
+    <DCC_DebugInformation>2</DCC_DebugInformation>
+  </PropertyGroup>
+  <ItemGroup>
+    <DelphiCompile Include="$(MainSource)"><MainSource>MainSource</MainSource></DelphiCompile>
+    <DCCReference Include="MainForm.pas" />
+  </ItemGroup>
+  <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" />
+</Project>
+```
+
+Run the build through a small batch file. Nesting `cmd /c "... && call "...rsvars.bat" && msbuild ..."` inside PowerShell mangles the quotes, and you get errors like `F1026 File not found: 'true.dpr'`:
+
+```bat
+:: build.cmd, next to the .dproj
+@echo off
+cd /d "%~dp0"
+call "C:\Program Files (x86)\Embarcadero\Studio\<version>\bin\rsvars.bat"
+set EXTRA=
+:: In a sandbox (e.g. a coding agent's) the IDE's environment.proj exists but can't be read, which fails
+:: every build with MSB4024. Then point APPDATA at an empty local folder so msbuild skips it; the .dproj
+:: above has explicit search paths, so nothing from that file is needed.
+type "%APPDATA%\Embarcadero\BDS\<version>\environment.proj" >nul 2>&1 || set EXTRA="/p:APPDATA=%~dp0.bdsenv" /p:EnvOptionsWarn=false
+msbuild MyApp.dproj /t:Build /p:Config=Debug /p:Platform=Win32 /v:minimal %EXTRA%
+```
+
+Then run `cmd /c build.cmd` from any shell. Look for `0 Error(s)` in the output. Other build stoppers:
+- `MSB4024 ... environment.proj could not be loaded. Access to the path ... is denied`: the build runs in a sandbox that can't read `%APPDATA%\Embarcadero`. The `build.cmd` above handles it. For a one-off build, add `"/p:APPDATA=<project folder>\.bdsenv" /p:EnvOptionsWarn=false` to the msbuild line.
+- `F2039 Could not create output file '...exe'`: the app is still running from an earlier test. Close it first (only the instance you started).
+- Garbled `€`, `·`, `é` in the running app: the `.pas` is UTF-8 **without BOM**. Save it with a BOM or use `#$20AC`-style character codes.
+
 ## TMS WEB Core specifics
 
 - Units use the `WEBLib.` prefix (`WEBLib.TMSFNCDataGrid`, `WEBLib.TMSFNCDataGridDatabaseAdapter`, `WEBLib.TMSFNCDataGridPDFIO`, ...). They are prefix-renamed copies of the VCL sources, so class and member names are identical.

@@ -108,16 +108,48 @@ end;
 
 ## Group summaries / aggregates
 
-Shortcut methods (call AFTER `Group`); each has `(AColumn: Integer; ...)` and `(AColumns: TArray<Integer>; ...)` overloads:
+Shortcut methods (call AFTER `Group`). Signatures **on `TTMSFNCDataGrid`** (`*.TMSFNCDataGrid.pas`), which differ from the ones on `TTMSFNCDataGridData`:
 
 ```delphi
+// GroupAverage is the exception: its single-column overload takes NO callback on the grid
+procedure GroupAverage(AColumn: Integer); overload;
+procedure GroupAverage(AColumns: TArray<Integer>; ACalculationOptionsCallback: TTMSFNCDataGridDataGetColumnCalculationOptionsCallback = nil); overload;
+
+// all the others accept an optional callback in both overloads
 procedure GroupSum(AColumn: Integer; ACalculationOptionsCallback: TTMSFNCDataGridDataGetColumnCalculationOptionsCallback = nil); overload;
-// same shape: GroupAverage, GroupCount, GroupMin, GroupMax, GroupDistinct, GroupStandardDeviation
+procedure GroupSum(AColumns: TArray<Integer>; ACalculationOptionsCallback: ... = nil); overload;
+// same shape as GroupSum: GroupCount, GroupMin, GroupMax, GroupDistinct, GroupStandardDeviation
 procedure GroupCustomCalculation(AColumn: Integer; ACalculationOptionsCallback: ... = nil;
   ACustomCalculationCallback: TTMSFNCDataGridDataCustomColumnCalculationCallback = nil); overload;
 procedure GroupCalculation(AColumn: Integer; AMethod: TTMSFNCDataGridDataCalculationMethod;
   ACalculationOptionsCallback: ... = nil; ACustomCalculationCallback: ... = nil); overload;
 ```
+
+**Callbacks: assign them to typed variables first.** An anonymous method written inline in a call to an overloaded method (`Group`, `GroupAverage`, `GroupSum`, ...) often fails with "There is no overloaded version of ... that can be called with these arguments", because the compiler can't pick the overload from an untyped anonymous method. Declare a variable of the callback type, assign the anonymous method to it, and pass the variable. For an average with formatting, use the array overload:
+
+```delphi
+var
+  avgFmt: TTMSFNCDataGridDataGetColumnCalculationOptionsCallback;
+  groupText: TTMSFNCDataGridDataGetCustomGroupCallback;
+begin
+  groupText :=
+    procedure(ACell: TTMSFNCDataGridCellCoord; AData: TTMSFNCDataGridCellValue; ALevel: Integer; var AGroup: string)
+    begin
+      AGroup := 'Region: ' + AGroup;
+    end;
+  Grid.Group([COL_REGION], nil, groupText);       // array overload; nil = default sort columns
+
+  avgFmt :=
+    procedure(AColumn: Integer; ALevel: Integer; var AOptions: TTMSFNCDataGridDataColumnCalculationOptions)
+    begin
+      AOptions.CalculationFormatType := gcfNumber;
+      AOptions.CalculationFormat := 'avg %.1f %%';
+    end;
+  Grid.GroupAverage([COL_MARGIN], avgFmt);         // NOT GroupAverage(COL_MARGIN, avgFmt)
+end;
+```
+
+`GroupSort(AColumn, gsdDescending)` sorts rows inside each group after grouping (e.g. "Revenue descending within each region").
 
 `TTMSFNCDataGridDataCalculationMethod = (gcmSum, gcmAverage, gcmMin, gcmMax, gcmCount, gcmCustom, gcmDistinct, gcmStandardDeviation)`.
 
@@ -250,5 +282,7 @@ Identical API on VCL/FMX/WEB. WEB demos load CSV with `LoadFromCSVData('train.cs
 - `Group([a, b])` is not two levels — use `CreateGroupInfo([a], [b])`.
 - Calling `Group` twice to change grouping silently does nothing — `Ungroup` first.
 - `GroupSum` etc. before `Group` — must be after.
+- `Grid.GroupAverage(ACol, ACallback)` — the grid has no such overload; use `Grid.GroupAverage([ACol], ACallback)`.
+- Inline anonymous methods passed straight into `Group` / `Group*` calls — assign them to a typed callback variable first (see above).
 - Expecting `OnGroup` after `Group()` in code — it only fires for visual grouping.
 - `Options.Grouping.Summary` already defaults to True; `MergeHeader` defaults to True.

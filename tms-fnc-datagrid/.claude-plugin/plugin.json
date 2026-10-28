@@ -1,7 +1,7 @@
 {
   "name": "tms-fnc-datagrid",
   "displayName": "TMS FNC DataGrid",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "Get started with TMS FNC DataGrid in Delphi (VCL, FMX, TMS WEB Core), get guided through adding advanced features like grouping, filtering, conditional formatting, database binding and export, and review grid code against the real API.",
   "author": {
     "name": "TMS Software",

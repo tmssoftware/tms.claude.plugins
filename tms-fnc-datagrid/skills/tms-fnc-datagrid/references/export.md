@@ -12,6 +12,23 @@ All three also have a public `Renderer: TTMSFNCDataGridRenderer`, which exports 
 
 Where they come from: PDF and Print IO sources are in `tms.fnc.uipack\Source\`, and their base classes and PDF library (`*.TMSFNCPDFLib`) are in **TMS FNC Core**. Excel IO is in `tms.fnc.uipack\Source\xlsAdapter\`, together with its own bundled XLS engine units (`*.TMSFNCXLSAdapter`, `*.TMSFNCUExcelAdapter`, `*.TMSFNCUFlx*`, `*.TMSFNCUXls*`). All of these compile into `VCLTMSFNCUIPackPkg` / `FMXTMSFNCUIPackPkg`, so **Excel export needs no FlexCel or other product**, only the UI Pack + FNC Core.
 
+When a project compiles the TMS **source** instead of the installed packages (for example a command-line build whose search path points at `tms.fnc.uipack\Source`), add `tms.fnc.uipack\Source\xlsAdapter` to the unit search path as well, or `FMX.TMSFNCDataGridExcelIO` is not found.
+
+### File names for export
+
+Build the path as a plain string next to the exe (or in a folder the user picks), then pass it to `Save` / `XLSExport`:
+
+```delphi
+var
+  fn: string;
+begin
+  fn := ExtractFilePath(ParamStr(0)) + 'Report.pdf';
+  PDFIO.Save(fn);
+end;
+```
+
+In **FMX units, `TPath` usually means `FMX.Objects.TPath`** (a vector-shape control), not `System.IOUtils.TPath`, so `TPath.Combine` / `TPath.GetDocumentsPath` fail with "Undeclared identifier: 'Combine'". Write `System.IOUtils.TPath.Combine(...)` fully qualified (and add `System.IOUtils` to the uses clause), or use `ExtractFilePath` / `IncludeTrailingPathDelimiter` as above. Open the result with `TTMSFNCUtils.OpenFile(fn)` (`*.TMSFNCUtils`) or `Options.OpenInPDFReader := True` for PDF.
+
 ---
 
 ## PDF: TTMSFNCDataGridPDFIO
@@ -301,6 +318,7 @@ On the grid and renderer (verified): `SaveToCSVData(AFileName: string)`, `SaveTo
 |---|---|
 | `Grid.ExportToPDF`, `Grid.SaveToPDF`, `Grid.SaveToXLS`, `Grid.Print` | Use the IO components: `TTMSFNCDataGridPDFIO.Save`, `TTMSFNCDataGridExcelIO.XLSExport`, `TTMSFNCDataGridPrintIO.Print` |
 | `PDFIO.Grid := ...` / `PDFIO.Export(...)` / `PDFIO.SaveToFile(...)` | `PDFIO.DataGrid := Grid; PDFIO.Save('x.pdf')` |
+| `TPath.Combine(...)` in an FMX unit | `System.IOUtils.TPath.Combine(...)` (FMX's `TPath` is the shape control) or `ExtractFilePath(ParamStr(0)) + 'x.pdf'` |
 | `ExcelIO.SaveToFile` / `ExcelIO.Export` / `ExcelIO.XLSXExport` | `XLSExport(FileName, ...)` / `XLSImport(FileName, ...)`. `.xls` only |
 | Expecting `XLSExport` to include the header row and first column | Defaults `DataGridStartRow = 1` and `DataGridStartCol = 1` skip grid row 0 (column captions) and column 0. Set both to `0` before `XLSExport` to export the whole grid |
 | Expecting `XLSExport` to overwrite an existing file | Default `Options.ExportOverwrite = omNever`. Set `omAlways` or `omWarn` |

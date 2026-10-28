@@ -6,7 +6,7 @@ description: >
   "set up TMS FNC DataGrid", or invokes /get-started in a VCL, FMX or TMS WEB Core project.
   It adds a working grid with sample data to the user's project and explains what was done.
 metadata:
-  version: "0.1.0"
+  version: "0.1.2"
 ---
 
 # Get started with TMS FNC DataGrid
@@ -51,7 +51,9 @@ For database data: drop a database adapter in code, connect it to the user's `TD
 
 - Re-read the changed unit and check every grid member used against the references.
 - If the user has Delphi command-line tools on PATH (`msbuild` with the RAD Studio environment, or `dcc32`/`dcc64`), offer to compile. Otherwise ask them to compile and run (F9) and report any error messages back.
+- When you create a new project from scratch, start from the minimal `.dproj` and `build.cmd` in `references/setup-and-install.md` ("Building from the command line"). That avoids the usual first-build failures (missing unit scope names, the IDE library path not visible to msbuild, PowerShell quoting).
 - If a compile error mentions an unknown identifier on a grid member, look it up in the references or the installed source (`*.TMSFNCDataGrid*.pas`) and fix it. Never "fix" it by guessing a different name.
+- If the user asked for a particular look, check it from an image the app saves of itself (see "Checking the look" in `references/styling.md`), not from a screenshot of the user's desktop. Close the instance you started before rebuilding.
 
 ## Step 6: Wrap up
 

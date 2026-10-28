@@ -7,7 +7,7 @@ description: >
   missing update brackets and other common mistakes, and proposes fixes.
 argument-hint: "[unit or folder]"
 metadata:
-  version: "0.1.0"
+  version: "0.1.2"
 ---
 
 # Review TMS FNC DataGrid usage
@@ -23,13 +23,14 @@ Review the unit or folder given as argument, otherwise every unit in the project
 Go through each, in order of severity:
 
 1. **Members that don't exist**: properties, methods, events or enum values that aren't in the API. These are often names carried over from TAdvStringGrid, TTMSFNCGrid or TStringGrid. Check against the "Does not exist / common mistakes" sections of every reference file.
-2. **Wrong signatures**: event handlers whose parameters don't match the documented declarations, wrong argument order or types (e.g. column/row order in cell access), wrong value types.
-3. **Framework mismatch**: mixing `VCL.`, `FMX.` and `WEBLib.` prefixed TMS units in one form, or the wrong prefix for the project's framework.
-4. **Missing dependencies**: extra components (database adapter, PDF/Excel/print IO) used without their unit, or features that need a separate product per `export.md` / `setup-and-install.md`.
-5. **Database binding mistakes**: filling cells by hand while a database adapter is connected, dataset not opened, adapter not linked to the grid or data source, per `database.md`.
-6. **Performance**: bulk cell updates, row additions or column setup without `BeginUpdate`/`EndUpdate`; reloading all data where a targeted update exists.
-7. **Lifetime & ownership**: grids or helper components created without an owner and never freed, event handlers on freed objects.
-8. **Simpler built-in alternatives**: hand-written sorting, filtering, grouping, colouring or export code where the grid has a built-in feature. Point to `/unlock-feature`.
+2. **Wrong signatures**: event handlers whose parameters don't match the documented declarations, wrong argument order or types (e.g. column/row order in cell access), wrong value types. Known traps: `Grid.GroupAverage(ACol, ACallback)` (the grid only has `GroupAverage([ACol], ACallback)`), inline anonymous methods passed to overloaded `Group*` calls (use typed variables), and `TPath.Combine` in FMX units, where `TPath` is `FMX.Objects.TPath` (see `grouping.md`, `export.md`).
+3. **Display and formatting order**: `OnGetCellFormatting` / `OnGetCellDisplayValue` assigned after the grid is filled, hard-coded number formats that depend on the Windows locale, or `True`/`False` text left visible behind data checkboxes (see `styling.md`).
+4. **Framework mismatch**: mixing `VCL.`, `FMX.` and `WEBLib.` prefixed TMS units in one form, or the wrong prefix for the project's framework.
+5. **Missing dependencies**: extra components (database adapter, PDF/Excel/print IO) used without their unit, or features that need a separate product per `export.md` / `setup-and-install.md`.
+6. **Database binding mistakes**: filling cells by hand while a database adapter is connected, dataset not opened, adapter not linked to the grid or data source, per `database.md`.
+7. **Performance**: bulk cell updates, row additions or column setup without `BeginUpdate`/`EndUpdate`; reloading all data where a targeted update exists.
+8. **Lifetime & ownership**: grids or helper components created without an owner and never freed, event handlers on freed objects.
+9. **Simpler built-in alternatives**: hand-written sorting, filtering, grouping, colouring or export code where the grid has a built-in feature. Point to `/unlock-feature`.
 
 ## Report
 

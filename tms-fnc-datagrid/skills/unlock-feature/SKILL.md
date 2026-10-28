@@ -8,7 +8,7 @@ description: >
   It shows a short feature menu, asks about the user's data, and writes the feature into their project.
 argument-hint: "[feature name]"
 metadata:
-  version: "0.1.0"
+  version: "0.1.2"
 ---
 
 # Unlock an advanced TMS FNC DataGrid feature
@@ -33,6 +33,7 @@ If the user named a feature (argument or message), skip the menu. Otherwise pres
 | Sorting (multi-column, custom) | Sort by several columns or with custom compare logic | `sorting-filtering.md` |
 | Grouping | Group rows by one or more columns, with expand/collapse and summaries; drag-to-group panel | `grouping.md` |
 | Conditional formatting | Colour, icons or bars based on cell values | `conditional-formatting.md` |
+| Styling & number formats | A polished dashboard look: header colours, zebra rows, selection colour, fonts, currency/date formats | `styling.md` |
 | Cell controls | Checkboxes, buttons, progress bars, images inside cells | `cell-controls.md` |
 | Grid in grid | Nested detail grids inside rows | `cell-controls.md` |
 | Merged cells | Span cells across rows/columns | `merging.md` |
@@ -64,6 +65,7 @@ Use sensible defaults for everything else and say what you chose.
 ## Step 5: Verify and explain
 
 - Re-read the changes and check every grid member against the references.
-- Offer to compile if Delphi command-line tools are available; otherwise ask the user to compile and run, and fix reported errors from the references or the installed `*.TMSFNCDataGrid*.pas` source.
+- Offer to compile if Delphi command-line tools are available; otherwise ask the user to compile and run, and fix reported errors from the references or the installed `*.TMSFNCDataGrid*.pas` source. For command-line builds use the `build.cmd` approach in `setup-and-install.md`.
+- For visual features (styling, conditional formatting, cell controls), check the result from an image the app saves of itself (`styling.md`, "Checking the look"). Never take a screenshot of the user's whole desktop. Close the app instance you started before rebuilding.
 - Explain in 2–4 plain sentences what the user will now see and how to tweak it (which property or rule to change).
 - Suggest one or two related features to unlock next (e.g. after grouping → group summaries or conditional formatting; after database binding → filter row or export).
