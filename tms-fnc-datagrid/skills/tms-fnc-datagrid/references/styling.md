@@ -141,7 +141,9 @@ Non-ASCII literals such as `€` or `·` in a `.pas` file: save the unit as **UT
 
 - A slim title/toolbar bar above the grid: a `TRectangle` (`Align := Top`, `Fill.Color`, `Stroke.Kind := TBrushKind.None`, unit `FMX.Objects` / `FMX.Graphics`) with `TLabel`s and `TButton`s. `TBrushKind` is FMX's own type. For FNC graphics (`Fill.Kind` on grid layouts) use `gfkSolid`/`gfkNone` from `*.TMSFNCGraphicsTypes`.
 - With several `Align := Right` buttons, FMX orders them by their current `Position.X`, so creating them in reading order often shows them reversed. Set `Position.X` explicitly (increasing left to right) before setting `Align`, or put them in a right-aligned `TLayout`.
-- `TLabel` / `TButton` ignore `Font`/`FontColor` until you remove the matching item from `StyledSettings` (e.g. `Lbl.StyledSettings := Lbl.StyledSettings - [TStyledSetting.Size, TStyledSetting.FontColor, TStyledSetting.Style]`).
+- `TLabel` / `TButton` ignore `Font`/`FontColor` until you remove the matching item from `StyledSettings` (e.g. `Lbl.StyledSettings := Lbl.StyledSettings - [TStyledSetting.Family, TStyledSetting.Size, TStyledSetting.FontColor, TStyledSetting.Style]`).
+- FMX is not VCL: an FMX `TFont` has `Family`, not `Name` (`Lbl.TextSettings.Font.Family := 'Segoe UI'`); the form position is `Position := TFormPosition.ScreenCenter`, not `poScreenCenter`; colours are `TAlphaColor` (`TAlphaColors.White`), not `clWhite`. The FNC grid's own layouts (`ALayout.Font.Name`) are FNC fonts and do use `Name`.
+- Don't give a unit the same name as an identifier declared in it: `unit SalesDashboardForm` with a global `var SalesDashboardForm: TSalesDashboardForm` fails with `E2004 Identifier redeclared`. Use e.g. `unit uMain` / `var FormMain`.
 
 ## Checking the look
 
@@ -160,3 +162,5 @@ Stop the running app before rebuilding, or the link step fails with `F2039 Could
 | Assigning `OnGetCellFormatting` after filling and expecting existing cells to change | Assign before filling (or refill / regroup) |
 | Blanking the Paid cell's value to hide True/False | `Font.Color := TAlphaColors.Null` or `DrawElements - [gcdText]` |
 | `AddDataProgressBarColumn` for "value + bar" | Conditional-formatting data bar |
+| FMX `Label.Font.Name`, `poScreenCenter`, `clWhite` | `TextSettings.Font.Family`, `TFormPosition.ScreenCenter`, `TAlphaColors.White` |
+| `unit X` and a global `var X` in the same unit | Different names (`unit uMain`, `var FormMain`) |

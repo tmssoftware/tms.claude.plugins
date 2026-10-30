@@ -9,7 +9,7 @@ description: >
   bind to a database, or export a TMS FNC data grid. Read it before writing or reviewing any TMS FNC DataGrid code,
   because the real API differs from TStringGrid, TAdvStringGrid and the older TTMSFNCGrid.
 metadata:
-  version: "0.1.3"
+  version: "0.1.4"
 ---
 
 # TMS FNC DataGrid API knowledge

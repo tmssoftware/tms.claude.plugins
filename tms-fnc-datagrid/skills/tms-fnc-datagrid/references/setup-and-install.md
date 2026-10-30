@@ -89,7 +89,21 @@ uses
   Data.DB, VCL.TMSFNCDataGridDatabaseAdapter;
 ```
 
-FMX is the same with `FMX.` prefixes plus `FMX.Types, FMX.Controls, FMX.Forms`. On FMX, `TTMSFNCDataGridCellControl` / `TTMSFNCDataGridInplaceEditor` are `TControl`; on VCL and WEB they are `TWinControl`.
+FMX is the same with `FMX.` prefixes plus `FMX.Types, FMX.Controls, FMX.Forms`.
+
+Complete FMX uses clause for a grid app with a header bar, grouping, styling and PDF/Excel export (compile-checked). Missing units are the most common first-build error, e.g. `TBrushKind` (in `FMX.Graphics`) or `TTMSFNCPDFLibPageOrientation` (in `FMX.TMSFNCPDFLib`):
+
+```delphi
+uses
+  System.SysUtils, System.Classes, System.Types, System.UITypes, System.Rtti, System.IOUtils,
+  System.Generics.Collections,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Objects, FMX.Layouts, FMX.StdCtrls,
+  FMX.TMSFNCTypes, FMX.TMSFNCUtils, FMX.TMSFNCGraphics, FMX.TMSFNCGraphicsTypes,
+  FMX.TMSFNCCustomControl, FMX.TMSFNCCustomComponent,
+  FMX.TMSFNCDataGridCell, FMX.TMSFNCDataGridData, FMX.TMSFNCDataGridBase,
+  FMX.TMSFNCDataGridCore, FMX.TMSFNCDataGridRenderer, FMX.TMSFNCDataGrid,
+  FMX.TMSFNCPDFLib, FMX.TMSFNCDataGridPDFIO, FMX.TMSFNCDataGridExcelIO;
+``` On FMX, `TTMSFNCDataGridCellControl` / `TTMSFNCDataGridInplaceEditor` are `TControl`; on VCL and WEB they are `TWinControl`.
 
 ## Creating the grid in code
 
