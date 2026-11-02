@@ -137,7 +137,7 @@ When you create a project yourself and build it with `msbuild`, a hand-written `
 - `F2613 Unit 'Windows' not found` / `'System.SysUtils' not found`: the `.dproj` has no `DCC_Namespace`, so unit scope names aren't resolved.
 - `File not found: 'FMX.TMSFNCDataGrid.dcu'` / `'FMX.TMSFNCDataGridExcelIO'`: the build doesn't see the IDE library path. This happens when msbuild runs as another user or in a sandbox, where the IDE's registry settings aren't available.
 
-This minimal FMX `.dproj` builds with `msbuild` without relying on the IDE's library path. Replace `<UIPACK>` and `<CORE>` with the `Source` folders of the installed `tms.fnc.uipack` and `tms.fnc.core`, and `MainForm.pas` with your units. The IDE upgrades the file when you open it.
+This minimal FMX `.dproj` builds with `msbuild` without relying on the IDE's library path. Replace `<FNCPATHS>` with the TMS FNC Core and UI Pack entries of the IDE library path for the target platform, separated by `;`. Get them from Tools > Options > Language > Delphi > Library > Library path in the IDE, or ask the user to copy them. The `Search Path` value under `HKCU\Software\Embarcadero\BDS\<version>\Library\<Platform>` holds the same list. These entries point to the compiled `.dcu` files, so this works for trial and DCU-only installs as well as source installs. Replace `MainForm.pas` with your units. The IDE upgrades the file when you open it.
 
 ```xml
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -155,7 +155,7 @@ This minimal FMX `.dproj` builds with `msbuild` without relying on the IDE's lib
     <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
     <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
     <DCC_DcuSearchPath>$(BDS)\lib\$(Platform)\release;$(DCC_DcuSearchPath)</DCC_DcuSearchPath>
-    <DCC_UnitSearchPath><UIPACK>;<UIPACK>\xlsAdapter;<CORE>;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+    <DCC_UnitSearchPath><FNCPATHS>;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     <DCC_Optimize>false</DCC_Optimize>
     <DCC_DebugInformation>2</DCC_DebugInformation>

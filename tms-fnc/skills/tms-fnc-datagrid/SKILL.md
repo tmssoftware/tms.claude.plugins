@@ -18,7 +18,7 @@ TTMSFNCDataGrid is the data grid in the TMS FNC UI Pack (product id `tms.fnc.uip
 
 ## Ground rules
 
-- **Never guess member names.** Use only members in the reference files below. If something isn't covered, verify it in the installed source (`*.TMSFNCDataGrid*.pas` in the UI Pack's `Source` folder) before using it. If it can't be verified, say so instead of inventing it.
+- **Never guess member names.** Use only members in the reference files below. If something isn't covered, don't fall back on reading component source code: many users have trial or DCU-only installs without it, so the plugin must work from these references alone. Instead, in this order: (1) check the official API reference at https://doc.tmssoftware.com/fnc/uipack/datagrid/ if web access is available, treating it as secondary (when it conflicts with these references, these win); (2) write the smallest use of the member and let the compiler confirm it ("Undeclared identifier" means it doesn't exist); (3) otherwise tell the user the member is unverified and suggest checking it with Code Insight in the IDE. Never invent a name.
 - **Don't carry over names from other grids.** TStringGrid, TAdvStringGrid and the older TTMSFNCGrid have similar-looking but different APIs. Each reference file ends with a "Does not exist / common mistakes" list; check it.
 - **Match the framework.** All TMS units in a form use the same prefix as the project's framework.
 - **Bracket bulk changes** with `BeginUpdate` / `EndUpdate`.

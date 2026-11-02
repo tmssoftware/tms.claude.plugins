@@ -1,8 +1,8 @@
-# Privacy policy: TMS FNC DataGrid plugin for Claude
+# Privacy policy: TMS FNC plugin for Claude
 
-Last updated: 27 October 2026
+Last updated: 2 November 2026
 
-This policy covers the **TMS FNC DataGrid** plugin (`tms-fnc-datagrid`) published by TMS Software in the [tmssoftware/tms.claude.plugins](https://github.com/tmssoftware/tms.claude.plugins) repository.
+This policy covers the **TMS FNC** plugin (`tms-fnc`, formerly `tms-fnc-datagrid`) published by TMS Software in the [tmssoftware/tms.claude.plugins](https://github.com/tmssoftware/tms.claude.plugins) repository.
 
 ## What the plugin is
 
@@ -15,7 +15,7 @@ The plugin consists only of text: skill instructions and API reference notes for
 ## Data processed when you use the plugin
 
 - **Your project files and conversations** are read and processed by Claude, the AI assistant you run the plugin in. That processing is done by Anthropic under your agreement with Anthropic and [Anthropic's privacy policy](https://www.anthropic.com/legal/privacy), not by TMS Software.
-- **Changes the plugin makes** (for example, adding grid code to a form) are made only to files in your own project, on your own machine, through Claude.
+- **Changes the plugin makes** (for example, adding a grid or tree view to a form) are made only to files in your own project, on your own machine, through Claude.
 - **Installing the plugin** downloads it from GitHub. GitHub's [privacy statement](https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement) applies to that download.
 
 ## TMS products and services

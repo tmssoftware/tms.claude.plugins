@@ -8,14 +8,14 @@ In Claude Code:
 
 ```
 /plugin marketplace add tmssoftware/tms.claude.plugins
-/plugin install tms-fnc-datagrid@tms-software
+/plugin install tms-fnc@tms-software
 ```
 
 ## Plugins
 
 | Plugin | Install id | What it does |
 |---|---|---|
-| [TMS FNC DataGrid](tms-fnc-datagrid) ([docs](https://doc.tmssoftware.com/fnc/uipack/datagrid/index.html)) | `tms-fnc-datagrid@tms-software` | Get started with TMS FNC DataGrid (VCL, FMX, TMS WEB Core), add advanced features such as grouping, filter row, conditional formatting, cell controls, database binding and Excel/PDF export, and review grid code against the real API. |
+| [TMS FNC](tms-fnc) ([UI Pack docs](https://doc.tmssoftware.com/fnc/uipack/index.html), [Core docs](https://doc.tmssoftware.com/fnc/core/index.html)) | `tms-fnc@tms-software` | Build VCL, FMX and TMS WEB Core apps with TMS FNC UI Pack and TMS FNC Core: add DataGrid, TreeView, Planner, RichEditor, Kanban Board, inputs, pickers and navigation controls, use Core graphics, PDF, web browser, JSON and persistence, and review FNC code against the real API. Replaces the former `tms-fnc-datagrid` plugin. |
 
 Each plugin needs the matching TMS product installed in your IDE (for example via TMS Smart Setup: `tms install tms.fnc.uipack`).
 
