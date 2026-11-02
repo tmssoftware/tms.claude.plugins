@@ -1,0 +1,18 @@
+{
+  "name": "tms-fnc",
+  "displayName": "TMS FNC",
+  "version": "0.2.0",
+  "description": "Build Delphi apps (VCL, FMX, TMS WEB Core) with TMS FNC UI Pack and TMS FNC Core: add DataGrid, TreeView, Planner, RichEditor, Kanban, inputs, pickers and more, use Core graphics, PDF, web browser, JSON and persistence, and review FNC code against the real API.",
+  "author": {
+    "name": "TMS Software",
+    "url": "https://www.tmssoftware.com"
+  },
+  "homepage": "https://doc.tmssoftware.com/fnc/uipack/index.html",
+  "repository": "https://github.com/tmssoftware/tms.claude.plugins",
+  "license": "LicenseRef-TMS-Software-Proprietary",
+  "keywords": ["delphi", "tms", "fnc", "uipack", "core", "datagrid", "treeview", "planner", "richeditor", "vcl", "fmx", "web-core"],
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://doc.tmssoftware.com/fnc/uipack/index.html",
+  "supportUrl": "https://support.tmssoftware.com/c/fnc",
+  "privacyPolicyUrl": "https://github.com/tmssoftware/tms.claude.plugins/blob/main/tms-fnc/PRIVACY.md"
+}
