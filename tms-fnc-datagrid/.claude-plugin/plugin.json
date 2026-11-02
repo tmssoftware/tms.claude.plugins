@@ -14,5 +14,5 @@
   "icon": "./.claude-plugin/icon.png",
   "documentationUrl": "https://doc.tmssoftware.com/fnc/uipack/index.html",
   "supportUrl": "https://support.tmssoftware.com/c/fnc",
-  "privacyPolicyUrl": "https://github.com/tmssoftware/tms.claude.plugins/blob/main/tms-fnc/PRIVACY.md"
+  "privacyPolicyUrl": "https://github.com/tmssoftware/tms.claude.plugins/blob/main/tms-fnc-datagrid/PRIVACY.md"
 }
