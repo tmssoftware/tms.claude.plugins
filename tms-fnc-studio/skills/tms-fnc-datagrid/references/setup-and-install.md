@@ -21,13 +21,13 @@ Verified against the source: `tms.fnc.uipack` 7.3.1.2 (`version.txt`), its `tmsb
 
 ## Install with TMS Smart Setup (`tms` CLI)
 
+**The user runs these commands themselves.** `tms credentials` stores their TMS account details and the install commands download from TMS. Never run them for the user, never ask for, read or type their e-mail or registration code, and never pass them on the command line. Show the commands and let the user run them in their own terminal.
+
 Commands verified from `tms.exe` 3.5 help output:
 
 ```bat
-:: 1. one-time: store your TMS account credentials (prompts for email + registration code)
+:: 1. one-time: the user enters their TMS account details when prompted
 tms credentials
-::   non-interactive form (options verified in "tms help credentials"):
-tms credentials -email:you@example.com -code:YOUR-CODE -check
 
 :: 2. see what your license can install
 tms list-remote
