@@ -1,17 +1,17 @@
-# TMS FNC plugin
+# TMS FNC Studio plugin
 
 Helps Delphi developers get productive with **TMS FNC UI Pack** and **TMS FNC Core** in VCL, FMX and TMS WEB Core projects: TTMSFNCDataGrid, TreeView, Planner, RichEditor, Memo, Kanban Board, lists, edits, pickers, navigation controls, dialogs and more, plus the Core graphics, bitmap/SVG, PDF, printing, web browser, popup, JSON, persistence and REST building blocks they share.
 
-This plugin replaces the former `tms-fnc-datagrid` plugin. Everything that plugin did is still here.
+This plugin replaces the former `tms-fnc-datagrid` and `tms-fnc` plugins. Everything they did is still here.
 
 ## Install
 
 ```
 /plugin marketplace add tmssoftware/tms.claude.plugins
-/plugin install tms-fnc@tms-software
+/plugin install tms-fnc-studio@tms-software
 ```
 
-If you had the old plugin installed, remove it first: `/plugin uninstall tms-fnc-datagrid@tms-software`.
+If you had an older version installed, remove it first: `/plugin uninstall tms-fnc-datagrid@tms-software` or `/plugin uninstall tms-fnc@tms-software`.
 
 ## What it does
 
