@@ -137,7 +137,7 @@ When you create a project yourself and build it with `msbuild`, a hand-written `
 - `F2613 Unit 'Windows' not found` / `'System.SysUtils' not found`: the `.dproj` has no `DCC_Namespace`, so unit scope names aren't resolved.
 - `File not found: 'FMX.TMSFNCDataGrid.dcu'` / `'FMX.TMSFNCDataGridExcelIO'`: the build doesn't see the IDE library path. This happens when msbuild runs as another user or in a sandbox, where the IDE's registry settings aren't available.
 
-This minimal FMX `.dproj` builds with `msbuild` without relying on the IDE's library path. Replace `<FNCPATHS>` with the TMS FNC Core and UI Pack entries of the IDE library path for the target platform, separated by `;`. Get them from Tools > Options > Language > Delphi > Library > Library path in the IDE, or ask the user to copy them. The `Search Path` value under `HKCU\Software\Embarcadero\BDS\<version>\Library\<Platform>` holds the same list. These entries point to the compiled `.dcu` files, so this works for trial and DCU-only installs as well as source installs. Replace `MainForm.pas` with your units. The IDE upgrades the file when you open it.
+This minimal FMX `.dproj` builds with `msbuild` without relying on the IDE's library path. Replace `<FNCPATHS>` with the TMS FNC Core and UI Pack entries of the IDE library path for the target platform, separated by `;`. Ask the user to copy them from Tools > Options > Language > Delphi > Library > Library path in the IDE. These entries point to the compiled `.dcu` files, so this works for trial and DCU-only installs as well as source installs. Replace `MainForm.pas` with your units. The IDE upgrades the file when you open it.
 
 ```xml
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -175,16 +175,14 @@ Run the build through a small batch file. Nesting `cmd /c "... && call "...rsvar
 @echo off
 cd /d "%~dp0"
 call "C:\Program Files (x86)\Embarcadero\Studio\<version>\bin\rsvars.bat"
-set EXTRA=
-:: In a sandbox (e.g. a coding agent's) the IDE's environment.proj exists but can't be read, which fails
-:: every build with MSB4024. Then point APPDATA at an empty local folder so msbuild skips it; the .dproj
-:: above has explicit search paths, so nothing from that file is needed.
-type "%APPDATA%\Embarcadero\BDS\<version>\environment.proj" >nul 2>&1 || set EXTRA="/p:APPDATA=%~dp0.bdsenv" /p:EnvOptionsWarn=false
-msbuild MyApp.dproj /t:Build /p:Config=Debug /p:Platform=Win32 /v:minimal %EXTRA%
+:: The .dproj above has explicit search paths, so msbuild doesn't need the IDE's environment options.
+:: Pointing APPDATA at an empty local folder makes msbuild skip them, which also avoids MSB4024 in
+:: sandboxes (e.g. a coding agent's) that can't access the IDE's settings.
+msbuild MyApp.dproj /t:Build /p:Config=Debug /p:Platform=Win32 /v:minimal "/p:APPDATA=%~dp0.bdsenv" /p:EnvOptionsWarn=false
 ```
 
 Then run `cmd /c build.cmd` from any shell. Look for `0 Error(s)` in the output. Other build stoppers:
-- `MSB4024 ... environment.proj could not be loaded. Access to the path ... is denied`: the build runs in a sandbox that can't read `%APPDATA%\Embarcadero`. The `build.cmd` above handles it. For a one-off build, add `"/p:APPDATA=<project folder>\.bdsenv" /p:EnvOptionsWarn=false` to the msbuild line.
+- `MSB4024 ... environment.proj could not be loaded. Access to the path ... is denied`: the build runs in a sandbox that can't access the IDE's settings. The `build.cmd` above avoids it. For a one-off build, add `"/p:APPDATA=<project folder>\.bdsenv" /p:EnvOptionsWarn=false` to the msbuild line.
 - `F2039 Could not create output file '...exe'`: the app is still running from an earlier test. Close it first (only the instance you started).
 - Garbled `€`, `·`, `é` in the running app: the `.pas` is UTF-8 **without BOM**. Save it with a BOM or use `#$20AC`-style character codes.
 
