@@ -109,7 +109,7 @@ Same API on VCL, FMX and WEB (WEB demo only differs in `LoadFromCSVData('CARS.cs
 ## Does not exist / common mistakes
 
 - `MergeCells(ACol1, ARow1, ACol2, ARow2)` with end coordinates — the 3rd/4th params are **counts**. Use `MergeRange(MakeCellRange(c1, r1, c2, r2))` for corner coordinates.
-- `SplitCells(c, r)` (TAdvStringGrid), `UnMergeCells`, `SplitAllCells`, `UnmergeAll` — only `SplitCell(ACell: TTMSFNCDataGridCellCoord)` exists; pass `MakeCell(c, r)`.
+- `SplitCells(c, r)` (TAdvStringGrid), `UnMergeCells`, `SplitAllCells`, `UnmergeAll` — only `SplitCell(ACell: TTMSFNCDataGridCellCoord)` exists; call it with `MakeCell(c, r)`.
 - `IsMergedCell(c, r)` / `IsBaseCell` / `CellSpan` — use `IsCellMerged(MakeCell(c, r))` and `BaseCell(...)`.
 - Writing `MergedColumns[]`/`MergedRows[]` to create a merge — they are bookkeeping flags; use `MergeCells`.
 - Auto-merging equal values (`MergeSameValues`, `AutoMerge`) — not a feature; compute runs yourself and call `MergeCells`.
