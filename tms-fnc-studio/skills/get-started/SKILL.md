@@ -39,7 +39,7 @@ Use only members documented there. Work from the references, not from component 
 
 ## Step 2: If the products are not installed
 
-Do not try to install them on the user's behalf. Explain the two options from the setup reference (TMS Smart Setup command line, or the regular installer from the TMS website) with the exact commands documented there: `tms install tms.fnc.uipack` installs the UI Pack and its TMS FNC Core dependency, `tms install tms.fnc.core` installs Core alone. Ask the user to confirm when it's installed, then continue.
+Do not try to install them on the user's behalf, and never ask for or handle their TMS account details. Explain the two options from the setup reference (TMS Smart Setup command line, or the regular installer from the TMS website) with the exact commands documented there: `tms install tms.fnc.uipack` installs the UI Pack and its TMS FNC Core dependency, `tms install tms.fnc.core` installs Core alone. Ask the user to confirm when it's installed, then continue.
 
 ## Step 3: Pick the component and ask one question
 
