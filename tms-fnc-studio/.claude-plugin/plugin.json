@@ -10,9 +10,5 @@
   "homepage": "https://doc.tmssoftware.com/fnc/uipack/index.html",
   "repository": "https://github.com/tmssoftware/tms.claude.plugins",
   "license": "LicenseRef-TMS-Software-Proprietary",
-  "keywords": ["delphi", "tms", "fnc", "uipack", "core", "datagrid", "treeview", "planner", "richeditor", "vcl", "fmx", "web-core"],
-  "icon": "./.claude-plugin/icon.png",
-  "documentationUrl": "https://doc.tmssoftware.com/fnc/uipack/index.html",
-  "supportUrl": "https://support.tmssoftware.com/c/fnc",
-  "privacyPolicyUrl": "https://github.com/tmssoftware/tms.claude.plugins/blob/main/tms-fnc-studio/PRIVACY.md"
+  "keywords": ["delphi", "tms", "fnc", "uipack", "core", "datagrid", "treeview", "planner", "richeditor", "vcl", "fmx", "web-core"]
 }
