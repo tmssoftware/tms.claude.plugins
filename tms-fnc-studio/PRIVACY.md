@@ -1,8 +1,8 @@
-# Privacy policy: TMS FNC plugin for Claude
+# Privacy policy: TMS FNC Studio plugin for Claude
 
-Last updated: 2 November 2026
+Last updated: 3 November 2026
 
-This policy covers the **TMS FNC** plugin (`tms-fnc`, formerly `tms-fnc-datagrid`) published by TMS Software in the [tmssoftware/tms.claude.plugins](https://github.com/tmssoftware/tms.claude.plugins) repository.
+This policy covers the **TMS FNC Studio** plugin (`tms-fnc-studio`, formerly `tms-fnc` and `tms-fnc-datagrid`) published by TMS Software in the [tmssoftware/tms.claude.plugins](https://github.com/tmssoftware/tms.claude.plugins) repository.
 
 ## What the plugin is
 
