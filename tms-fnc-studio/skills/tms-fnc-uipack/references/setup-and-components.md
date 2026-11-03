@@ -128,7 +128,7 @@ procedure LoadSettingsFromStream(AStream: TStream); virtual;
 function IsDesignTime: Boolean; virtual;
 property DataPointer: Pointer;  property DataBoolean: Boolean;  property DataObject: TObject;  // free-use tags
 ```
-`TTMSFNCCustomComponent` has the same `BeginUpdate/EndUpdate`, `AdaptToStyle` and `Save/LoadSettingsToFile/Stream` members. Settings are saved as JSON. Pass `AAppearanceOnly = True` to save only the look, which works like a theme file.
+`TTMSFNCCustomComponent` has the same `BeginUpdate/EndUpdate`, `AdaptToStyle` and `Save/LoadSettingsToFile/Stream` members. Settings are saved as JSON. Set `AAppearanceOnly = True` to save only the look, which works like a theme file.
 
 - **Create / Parent / Align**: `X := TTMSFNCxxx.Create(Self); X.Parent := Self;`. Alignment is `alClient` on VCL/WEB and `TAlignLayout.Client` on FMX.
 - **BeginUpdate / EndUpdate** around bulk changes (adding items, tabs, nodes, pages). Pair them in `try..finally`.

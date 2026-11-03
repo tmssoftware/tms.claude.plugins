@@ -241,5 +241,5 @@ if r.IsError then ShowMessage(r.ErrorMessage);
 - Expecting `Width`, `Height`, `Align`, `Visible`, `Enabled`, `Name`, `Tag` of a control to be saved: they are in `ExcludePropertyList`.
 - Forgetting `RegisterClass(TMyItem)` for objects that must be created while reading (collection items of custom classes, `TObjectList<TMyItem>` items): `Type "TMyItem" not found`.
 - `ITMSFNCPersistence.CanSaveProperty` together with `TTMSFNCPersistence.ExcludeProperties`: when the object implements the interface, its answer replaces the `ExcludeProperties` check.
-- `TTMSFNCObjectResolver.SetValue(Root, Path, 'text')` with a string: the string overload is commented out in source; pass `TValue.From<string>('text')`.
+- `TTMSFNCObjectResolver.SetValue(Root, Path, 'text')` with a string: the string overload is commented out in source; use `TValue.From<string>('text')`.
 - `TTMSFNCObjectResolver.GetValue` / `Evaluate` / `Find`: the read method is `Resolve`; check `IsError` and `Kind` before reading `Value`.

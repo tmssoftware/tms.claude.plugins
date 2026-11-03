@@ -210,7 +210,7 @@ function CalculateTextWidth(AText: string): Single; overload;     function Calcu
 ```
 
 - Alignment enum: `gtaCenter`, `gtaLeading`, `gtaTrailing`. Trimming: `gttNone`, `gttCharacter`, `gttWord`.
-- HTML is on by default (`ASupportHTML = True`): the mini-HTML engine (`*.TMSFNCHTMLEngine`, function `HTMLDrawEx`) handles `<b> <i> <u> <s> <br> <p> <font color="..." bgcolor="..." size="..." face="..."> <a href="..."> <img src="..."> <ul>/<li> <sub> <sup> <shad> <hr>`. Pass `ASupportHTML := False` to draw a literal `<`.
+- HTML is on by default (`ASupportHTML = True`): the mini-HTML engine (`*.TMSFNCHTMLEngine`, function `HTMLDrawEx`) handles `<b> <i> <u> <s> <br> <p> <font color="..." bgcolor="..." size="..." face="..."> <a href="..."> <img src="..."> <ul>/<li> <sub> <sup> <shad> <hr>`. Use `ASupportHTML := False` to draw a literal `<`.
 - Hit-testing an anchor: `s := g.DrawText(r, html, True, gtaLeading, gtaLeading, gttNone, 0, -1, -1, True, True, X, Y);` returns the `href` under (X, Y) (draws nothing when `ATestAnchor` is True).
 - `<img src="name">` looks the name up in `g.BitmapContainer`; also `src="data:image/png;base64,..."`, `src="file://..."` (not WEB), `src="idx:N"` with `g.ImageList` (VCL/LCL only). Related properties: `URLColor` (default `gcBlue`), `URLUnderline`, `HighlightColor`, `HighlightTextColor`, `OptimizedHTMLDrawing`. Strip tags with `TTMSFNCUtils.HTMLStrip(AHTML)`.
 

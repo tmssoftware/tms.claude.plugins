@@ -77,7 +77,7 @@ class function EpochToDateTime(const AEpoch: string): TDateTime;       // string
 ```
 
 Notes from the implementation:
-- `DateTimeToISO(d)` gives `yyyymmddThhnnss`; pass `AAddDelimiters = True` for `yyyy-mm-ddThh:nn:ss`. `AAddMilliSeconds` appends `.zzzZ`. It does no time-zone conversion.
+- `DateTimeToISO(d)` gives `yyyymmddThhnnss`; set `AAddDelimiters = True` for `yyyy-mm-ddThh:nn:ss`. `AAddMilliSeconds` appends `.zzzZ`. It does no time-zone conversion.
 - `SelectFile`/`SaveFile` are synchronous on desktop; on WEB the result arrives in the callback (`TTMSFNCUtilsFileCallBackEvent = reference to procedure(const AFile: string; const AResult: Boolean)`, `of object` on WEB/LCL).
 - `SplitURL` treats a URL without scheme as https.
 

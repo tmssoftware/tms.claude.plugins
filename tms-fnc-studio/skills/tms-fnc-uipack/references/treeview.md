@@ -162,7 +162,7 @@ After the underlying data changes call `TMSFNCTreeView1.ClearNodeList` (inside B
 |---|---|---|
 | Data | `Nodes`, `TTMSFNCTreeViewNode.Text[col]` | your arrays + `OnGetNumberOfNodes`/`OnGetNodeText` |
 | Selected item | `SelectedNode` / `FocusedNode` (TTMSFNCTreeViewNode) | `SelectedVirtualNode` (`SelectedNode` returns nil) |
-| Events | all events pass `TTMSFNCTreeViewVirtualNode`; use `ANode.Node` | `ANode.Node = nil`; use `Level`/`Index`/`Row` |
+| Events | all events receive a `TTMSFNCTreeViewVirtualNode`; use `ANode.Node` | `ANode.Node = nil`; use `Level`/`Index`/`Row` |
 | Change data | edit node properties (auto refresh) | call `ClearNodeList` |
 Assigning `OnGetNumberOfNodes` makes `DoGetNumberOfNodes` **clear `Nodes`** on every rebuild: you cannot mix both modes.
 
