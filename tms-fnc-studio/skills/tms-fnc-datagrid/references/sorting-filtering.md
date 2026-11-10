@@ -1,4 +1,5 @@
 # TMS FNC DataGrid – sorting and filtering
+> Sections (line ranges): 9-125 Sorting · 126-296 Filtering · 297-314 Does not exist / common mistakes
 
 Verified against `*.TMSFNCDataGridData.pas`, `*.TMSFNCDataGridCore.pas`, `*.TMSFNCDataGridRenderer.pas`,
 `*.TMSFNCDataGrid.pas` and the Basic `Sorting`/`Filtering` and Advanced `Filter Row` demos

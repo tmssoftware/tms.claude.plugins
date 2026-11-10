@@ -1,4 +1,5 @@
 # Planner / scheduler (TTMSFNCPlanner, TTMSFNCPlannerDatabaseAdapter, TTMSFNCPlannerItemEditorRecurrency, TTMSFNCRecurrencyHandler, TTMSFNCPlannerToolBarPopup)
+> Sections (line ranges): 6-21 Units, palette, platforms · 22-60 Core model: positions, resources, modes · 61-110 Items, resources, groups · 111-149 Example · 150-169 Interaction · 170-194 Key events · 195-198 Appearance · 199-204 Item editing dialog: three customisation levels · 205-231 Recurrency · 232-261 TTMSFNCPlannerDatabaseAdapter · 262-265 TTMSFNCPlannerToolBarPopup · 266-271 Platform notes · 272-285 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source: `*.TMSFNCPlanner`, `*.TMSFNCPlannerBase`, `*.TMSFNCPlannerData`, `*.TMSFNCPlannerDatabaseAdapter`, `*.TMSFNCPlannerItemEditorRecurrency`, `*.TMSFNCRecurrencyHandler`, `*.TMSFNCPlannerToolBarPopup`, the `*Reg.pas` units and the demos `Planner`, `Planner Database Adapter and PDFLib`, `Planner TV Guide` (VCL/FMX/WEB).
 

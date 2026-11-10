@@ -1,4 +1,5 @@
 # Edit controls (TTMSFNCEdit, TTMSFNCEditButton, TTMSFNCSpinEdit, TTMSFNCComboBox, TTMSFNCSearchEdit, TTMSFNCIPEdit, TTMSFNCLabelEdit, TTMSFNCDirectoryEdit, TTMSFNCPassLock, TTMSFNCSignatureCapture, TTMSFNCTouchKeyboard)
+> Sections (line ranges): 6-25 Units, palette, platforms · 26-94 TTMSFNCEdit · 95-127 TTMSFNCSpinEdit · 128-172 TTMSFNCComboBox · 173-185 TTMSFNCSearchEdit · 186-204 TTMSFNCIPEdit · 205-217 TTMSFNCLabelEdit · 218-227 TTMSFNCDirectoryEdit · 228-256 TTMSFNCPassLock · 257-268 TTMSFNCSignatureCapture · 269-288 TTMSFNCTouchKeyboard / TTMSFNCPopupTouchKeyboard · 289-296 Platform notes · 297-314 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source: `*.TMSFNCEdit`, `*.TMSFNCSpinEdit`, `*.TMSFNCTrackBar` (spin edit base), `*.TMSFNCComboBox`, `*.TMSFNCCustomPicker`, `*.TMSFNCSearchEdit`, `*.TMSFNCSearchList`, `*.TMSFNCIPEdit`, `*.TMSFNCLabelEdit`, `*.TMSFNCDirectoryEdit`, `*.TMSFNCPassLock`, `*.TMSFNCSignatureCapture`, `*.TMSFNCTouchKeyboard` (+ FNC Core 4.5.0.0 graphics types).
 

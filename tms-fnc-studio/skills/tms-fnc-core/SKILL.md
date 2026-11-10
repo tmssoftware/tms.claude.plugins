@@ -1,18 +1,16 @@
 ---
 name: tms-fnc-core
 description: >
-  Accurate API knowledge for TMS FNC Core (product tms.fnc.core) in Delphi for VCL, FMX, TMS WEB Core and Lazarus, the
-  foundation every TMS FNC product builds on. This skill should be used whenever code references TTMSFNCGraphics,
-  TTMSFNCCustomControl, TTMSFNCGraphicsFill/Stroke/Font, gcXXX colors, TTMSFNCBitmap, TTMSFNCBitmapContainer,
-  TTMSFNCURLBitmapContainer, TTMSFNCSVGImageCollection, TTMSFNCStylesManager, TTMSFNCPDFLib, TTMSFNCGraphicsPDFIO,
-  TTMSFNCGraphicsPrintIO, TTMSFNCPrinter, TTMSFNCWebBrowser, TTMSFNCEdgeWebBrowser, TTMSFNCPopup, TTMSFNCPopupMenu,
-  TTMSFNCHint, TTMSFNCResponsiveManager, TTMSFNCUndoManager, TTMSFNCUtils, TTMSFNCJSONReader/Writer, TTMSFNCPersistence,
-  SaveSettingsToFile, TTMSFNCObjectResolver, TTMSFNCCloudBase, TTMSFNCHTTPServer, TTMSFNCDataBinder, TTMSFNCDataSet or
-  TTMSFNCFilterRulesManager, or when the user asks how to draw custom graphics, generate a PDF, print, embed a web
-  browser, parse JSON, persist settings or call a REST API with TMS FNC. Read it before writing or reviewing any TMS FNC
-  Core code, because the real API differs from VCL TCanvas, FMX TCanvas and other component sets.
+  Accurate API knowledge for TMS FNC Core (tms.fnc.core), the base of every TMS FNC product, in Delphi VCL, FMX, TMS
+  WEB Core and Lazarus. Use whenever code references TTMSFNCGraphics, TTMSFNCCustomControl, Fill/Stroke/Font, gc*
+  colors, TTMSFNCBitmap, (URL)BitmapContainer, SVGImageCollection, TTMSFNCStylesManager, TTMSFNCPDFLib, GraphicsPDFIO,
+  GraphicsPrintIO, TTMSFNCPrinter, (Edge)WebBrowser, Popup, PopupMenu, Hint, ResponsiveManager, UndoManager,
+  TTMSFNCUtils, JSON reader/writer, persistence (SaveSettingsToFile), CloudBase, HTTPServer, DataBinder or
+  FilterRulesManager, or when the user asks to custom-draw controls, charts or KPI cards, generate a PDF, print, embed
+  a web browser, parse JSON, persist settings, style an app or call a REST API with TMS FNC. Read it before writing or
+  reviewing FNC Core code: the real API differs from VCL/FMX TCanvas and other component sets.
 metadata:
-  version: "0.2.0"
+  version: "0.3.1"
 ---
 
 # TMS FNC Core API knowledge
@@ -21,14 +19,15 @@ TMS FNC Core (product id `tms.fnc.core`, version 4.5) is the framework-neutral b
 
 ## Ground rules
 
-- **Never guess member names.** Use only members in the reference files below. If something isn't covered, don't fall back on reading component source code: many users have trial or DCU-only installs without it, so the plugin must work from these references alone. Instead, in this order: (1) check the official API reference at https://doc.tmssoftware.com/fnc/core/ if web access is available, treating it as secondary (when it conflicts with these references, these win); (2) write the smallest use of the member and let the compiler confirm it ("Undeclared identifier" means it doesn't exist); (3) otherwise tell the user the member is unverified and suggest checking it with Code Insight in the IDE. Never invent a name.
+- **Never guess member names.** Use only members in these references. If one isn't covered, don't read component source (many installs are trial/DCU-only): check https://doc.tmssoftware.com/fnc/core/ if web access is available (these references win on conflicts), else compile the smallest use and let the compiler confirm it, else tell the user the member is unverified.
 - **Don't carry over names** from VCL/FMX `TCanvas`, `TWebBrowser`, `TPopupMenu`, `TJSONObject` helpers or older TMS components. Each reference file ends with a "Does not exist / common mistakes" list; check it.
 - **Match the framework.** Use `VCL.`, `FMX.` or `WEBLib.` units consistently (Lazarus: `LCLTMSFNC...`, no dot). The framework-neutral `TMS.*` units are RTL-only copies, not the units for apps.
+- **New project from code**: a hand-written `.dpr` must not contain `{$R *.res}` unless the `.res` exists (E1026). Non-FNC types need their own units: VCL `TPngImage` → `Vcl.Imaging.pngimage`; FMX `TBrushKind`/`TBitmap` → `FMX.Graphics`, `TAlignLayout` → `FMX.Types`, `TAlphaColors`/`TFontStyle` → `System.UITypes`; `TRectF`/`PointF` → `System.Types`.
 - Some classes don't exist on every framework. Check the reference before using one in a WEB or LCL project.
 
 ## The pitfalls that matter most
 
-1. Custom FNC controls override `Draw(AGraphics: TTMSFNCGraphics; ARect: TRectF)`, not `Paint`. `Fill`/`Stroke` are protected on `TTMSFNCCustomControl`. `TTMSFNCGraphics` has no `FillRect`, `TextOut`, `TextWidth`, `DrawImage` or `DrawCircle`; see `graphics.md`. Enum prefixes are `gfk*`, `gsk*`, `gta*`. `DrawText` renders mini-HTML by default.
+1. Custom FNC controls override `Draw(AGraphics: TTMSFNCGraphics; ARect: TRectF)`, not `Paint`. `Fill`/`Stroke` are protected on `TTMSFNCCustomControl`. `TTMSFNCGraphics` has no `FillRect`, `TextOut`, `TextWidth`, `DrawImage` or `DrawCircle`; see `graphics.md`. Enum prefixes are `gfk*`, `gsk*`, `gta*`. `DrawText` renders mini-HTML by default. `DrawBackground` paints `Fill` + a grey `Stroke` before `Draw`: set them to the page colour / `gskNone` in a custom card's constructor (on VCL `gfkNone` is not see-through).
 2. An off-screen bitmap canvas needs `BeginScene`/`EndScene`. Copy `g.Bitmap` before freeing `g`. `RestoreState` frees the saved state.
 3. `gcNull` is -1 on VCL/WEB and 0 (`TAlphaColors.Null`) on FMX. On FMX use `gc*` colours, not `cl*`.
 4. Images are referenced by name through a `BitmapContainer` + `BitmapName`. Lookup is `FindBitmap(name)` (case-insensitive). `TTMSFNCBitmapContainer.AddFromURL` does nothing on VCL/FMX/LCL, so use `TTMSFNCURLBitmapContainer`. On VCL `TTMSFNCBitmap` is a `TPicture` (no Canvas). WEB has no SVG engine and loads images asynchronously. `TTMSFNCSVGImageCollection` is VCL-only.
@@ -45,7 +44,7 @@ TMS FNC Core (product id `tms.fnc.core`, version 4.5) is the framework-neutral b
 
 ## Reference files
 
-Read the file(s) for the task at hand. Don't load all of them.
+How to read them (saves most of the tokens and time): line 2 of every file is a section map, `> Sections (line ranges): 6-26 Units · 27-58 ...`. Read the first 2 lines, then only the line ranges you need (Read with offset/limit, `sed -n '27,58p'`, or `Get-Content f | Select-Object -Skip 26 -First 32`), plus the last section ("Does not exist / common mistakes") when you write code for that control. Every command is another full model round trip, so batch: read the maps of all files you need in one command, then all needed ranges in one or two commands (keep each output under ~40 KB). Never dump whole files: long outputs get truncated and re-read.
 
 | File | Covers |
 |---|---|
@@ -64,6 +63,6 @@ Read the file(s) for the task at hand. Don't load all of them.
 
 ## Related skills
 
-- `tms-fnc-uipack`: the UI Pack controls built on Core.
+- `tms-fnc-uipack`: the UI Pack controls built on Core. Its `dashboards.md` combines Core custom drawing (KPI cards, charts) with UI Pack controls.
 - `tms-fnc-datagrid`: TTMSFNCDataGrid.
 - `/get-started`, `/unlock-feature`, `/review`.

@@ -1,4 +1,5 @@
 # TMS FNC Core: setup, install, units and base classes (TTMSFNCCustomControl, TTMSFNCCustomComponent)
+> Sections (line ranges): 6-23 Product and packages · 24-47 Install with TMS Smart Setup · 48-68 Components and palette pages · 69-87 Unit prefix rules · 88-100 Which unit declares what · 101-143 Base classes · 144-150 Common types · 151-166 Minimal runtime creation · 167-170 Building from the command line · 171-186 Does not exist / common mistakes
 
 Verified against the source: `tms.fnc.core` 4.5.0.0 (`version.txt`), its `tmsbuild.yaml`, `Packages\d13\*.dpk`, `Packages\web\TMSFNCCoreWEB.dpk`, every `*Reg.pas` / `*RegDE.pas` unit, `VCL.TMSFNCCustomControl`, `VCL.TMSFNCCustomComponent`, `VCL.TMSFNCTypes`, `VCL.TMSFNCGraphicsTypes`. `tms` CLI commands as verified for the DataGrid setup file (Smart Setup `tms.exe` 3.5).
 

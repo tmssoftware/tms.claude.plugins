@@ -1,4 +1,5 @@
 # Renderer architecture, RendererSource, non-visual export
+> Sections (line ranges): 4-24 Layering · 25-97 Non-visual data + export · 98-169 RendererSource: swappable render "layers" · 170-188 Platform notes · 189-199 Does not exist / common mistakes
 
 ## Layering (class hierarchy)
 

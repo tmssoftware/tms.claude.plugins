@@ -1,4 +1,5 @@
 # Dialogs, filter view and misc (TTMSFNCTaskDialog, TTMSFNCFontDialog, TTMSFNCFindDialog, TTMSFNCReplaceDialog, TTMSFNCFilterView, TTMSFNCDataSetFilterDialog / TTMSFNCFilterDialog, TTMSFNCObjectInspector, TTMSFNCChat)
+> Sections (line ranges): 6-21 Units, palette, platforms · 22-31 How each dialog returns its result · 32-105 TTMSFNCTaskDialog · 106-140 TTMSFNCFontDialog · 141-193 TTMSFNCFindDialog / TTMSFNCReplaceDialog · 194-251 TTMSFNCFilterView · 252-295 TTMSFNCDataSetFilterDialog and · 296-330 TTMSFNCObjectInspector · 331-380 TTMSFNCChat · 381-388 Platform notes · 389-406 Does not exist / common mistakes
 
 Verified against `tms.fnc.uipack` 7.3.1.2 source: `VCL.TMSFNCTaskDialog`, `VCL.TMSFNCFontDialog`, `VCL.TMSFNCCustomDialog`, `VCL.TMSFNCFindDialog`, `VCL.TMSFNCReplaceDialog`, `VCL.TMSFNCFilterView`, `VCL.TMSFNCFilterDialog`, `VCL.TMSFNCObjectInspector`, `VCL.TMSFNCChat`, their `*Reg.pas` units, the WEB package `Packages\web\TMSFNCUIPackWEB.dpk`, and FNC Core 4.5.0.0 `TMS.TMSFNCFilterBuilder`.
 

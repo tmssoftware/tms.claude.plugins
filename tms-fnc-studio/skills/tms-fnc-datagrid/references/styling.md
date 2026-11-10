@@ -1,4 +1,5 @@
 # Styling and number formatting (TTMSFNCDataGrid)
+> Sections (line ranges): 8-15 Order of setup · 16-81 State layouts: Grid.CellAppearance · 82-99 Per-cell layout: OnGetCellLayout · 100-137 Locale-proof formats · 138-143 Checkbox, bar and "value + bar" columns · 144-151 Header bar and toolbar · 152-157 Checking the look · 158-171 Does not exist / common mistakes
 
 How to make the grid look like a polished business dashboard in one pass: state layouts, per-cell layout, number/date formats that don't depend on the Windows locale, checkbox and bar columns, and how to check the look. Code below is FMX and compiled against `tms.fnc.uipack` 7.3.1.2. For VCL use `TColor` / `gcXxx` colours and `[fsBold]` instead of `TAlphaColor` and `[TFontStyle.fsBold]`.
 
@@ -69,9 +70,12 @@ SetLayoutFont(ca.SummaryLayout, $FF1B3A63, True);
 FGrid.Options.Banding.Enabled := True;
 FGrid.Options.Selection.Mode := gsmSingleRow;
 FGrid.DefaultRowHeight := 30;
+// AFTER EndUpdate, never inside BeginUpdate/EndUpdate (see below):
 FGrid.Options.Column.Stretching.Enabled := True;
 FGrid.Options.Column.Stretching.Mode := gstmProportional;   // keep ColumnWidths ratios, fill the width
 ```
+
+**Blank grid trap (verified, VCL 7.3):** `Stretching.Enabled := True` together with `Mode := gstmProportional` inside `BeginUpdate`/`EndUpdate` makes the grid paint completely empty (no header, no rows). A stretch runs while the available width is 0, proportional mode scales every `ColumnWidths[i]` to 0, and later proportional stretches can't recover from all-zero widths. Set stretching after `EndUpdate`; to repair a grid in that state, assign `ColumnWidths` again and call `StretchColumns`.
 
 Sizes: `DefaultRowHeight`, `RowHeights[ARow]`, `ColumnWidths[AColumn]`. The frame around the grid: `Grid.Fill`, `Grid.Stroke`.
 
@@ -147,7 +151,7 @@ Non-ASCII literals such as `€` or `·` in a `.pas` file: save the unit as **UT
 
 ## Checking the look
 
-Look at the running app before declaring a visual task done. Plan for it in the first version of the code: a command-line switch (e.g. `-snapshot`) that saves the image, writes any self-checks to a text file and closes the app. Adding it later costs an extra build. Capture **only your own window**: have the app save an image of itself, for example a root `TLayout` that holds the whole UI (`RootLayout.MakeScreenshot.SaveToFile('shot.png')`, FMX `TControl.MakeScreenshot`, free the bitmap), or `Grid.SaveToImageData('grid.png')` for just the grid's data. `TForm` has no `MakeScreenshot`. Never take a full-desktop screenshot: it captures the user's other windows (mail, chats) and isn't needed.
+Look at the running app before declaring a visual task done. Plan for it in the first version of the code: a command-line switch (e.g. `-snapshot`) that saves the image, writes any self-checks to a text file and closes the app. Adding it later costs an extra build. Capture **only your own window**: have the app save an image of itself, for example a root `TLayout` that holds the whole UI (`RootLayout.MakeScreenshot.SaveToFile('shot.png')`, FMX `TControl.MakeScreenshot`, free the bitmap), or `Grid.SaveToImageData('grid.png')` for just the grid's data. `TForm` has no `MakeScreenshot`. On VCL, `PaintTo` / `GetFormImage` can miss FNC child controls; copy your own window's client DC instead (`BitBlt` from `GetDC(Handle)` into a `TBitmap`, then `TPngImage`), as in the uipack skill's `dashboards.md`. Never take a full-desktop screenshot: it captures the user's other windows (mail, chats) and isn't needed. When launching the snapshot from Git Bash, a `/snap` argument is rewritten into a path (`C:/Program Files/Git/snap`); use `-snap`, or set `MSYS_NO_PATHCONV=1`.
 
 Stop the running app before rebuilding, or the link step fails with `F2039 Could not create output file`.
 

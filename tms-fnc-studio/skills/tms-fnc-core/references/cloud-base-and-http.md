@@ -1,4 +1,5 @@
 # HTTP requests and HTTP server (TTMSFNCCloudBase, TTMSFNCHTTPServer)
+> Sections (line ranges): 6-16 Units and palette · 17-64 Request model · 65-105 TTMSFNCCustomCloudBase / TTMSFNCCloudBase · 106-176 Examples · 177-216 TTMSFNCHTTPServer · 217-223 Platform notes · 224-236 Does not exist / common mistakes
 
 Verified against TMS FNC Core 4.5.0.0 source: `*.TMSFNCCloudBase` (+ platform units `.Win`, `.Mac`, `.Android`, `.Unix`, `.WEB`), `TMS.TMSFNCHTTPServer` (+ `.Win`, `.General`), package `.dpk` files; demos `tms.fnc.core.demos\VCL\TMSFNCCloudBase`, `FMX\TMSFNCCloudBase`, `WEB\TMSFNCCloudBase`.
 

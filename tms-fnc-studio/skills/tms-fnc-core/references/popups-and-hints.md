@@ -1,4 +1,5 @@
 # Popups, popup menus and hints (TTMSFNCPopup, TTMSFNCPopupMenu, TTMSFNCHint)
+> Sections (line ranges): 6-16 Units and palette · 17-82 TTMSFNCPopup · 83-150 TTMSFNCPopupMenu · 151-186 TTMSFNCHint · 187-193 Platform notes · 194-206 Does not exist / common mistakes
 
 Verified against TMS FNC Core 4.5.0.0 source: `*.TMSFNCPopup`, `*.TMSFNCPopupMenu`, `*.TMSFNCHint` and their `*Reg` units.
 

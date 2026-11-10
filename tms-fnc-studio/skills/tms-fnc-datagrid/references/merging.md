@@ -1,4 +1,5 @@
 # Cell merging / splitting (TTMSFNCDataGrid)
+> Sections (line ranges): 14-38 Merge API · 39-76 Demo · 77-83 Interaction with other features · 84-105 Caveat: MergeColumn · 106-109 Platform notes · 110-118 Does not exist / common mistakes
 
 Merging is per-cell merge info stored in the data layer (`TTMSFNCDataGridData`); the grid methods forward to `Root`. The top-left cell of a merged block is the **base cell**: value, layout, editing and controls live there.
 

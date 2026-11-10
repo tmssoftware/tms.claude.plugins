@@ -1,4 +1,5 @@
 # HTML text and images (TTMSFNCHTMLText, FNC mini-HTML, TTMSFNCImage, TTMSFNCHotSpotImage)
+> Sections (line ranges): 6-19 Units, palette, platforms · 20-46 FNC mini-HTML · 47-101 TTMSFNCHTMLText · 102-115 TTMSFNCImage · 116-160 TTMSFNCHotSpotImage · 161-190 TTMSFNCPDFImageBook · 191-196 Platform notes · 197-210 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source (`*.TMSFNCHTMLText`, `*.TMSFNCImage`, `*.TMSFNCHotSpotImage`, `*.TMSFNCHotSpotImageEditor`, `*.TMSFNCHTMLImageContainer`, `*.TMSFNCPDFImageBook`, `*.TMSFNCTextView`) and the HTML engine in FNC Core 4.5.0.0 (`*.TMSFNCHTMLEngine`, used by `TTMSFNCGraphics.DrawText`).
 
@@ -78,7 +79,8 @@ begin
   ht.Height := 80;
   ht.WordWrapping := True;
   ht.HorizontalTextAlign := gtaLeading;
-  ht.Fill.Kind := gfkNone;
+  ht.Fill.Kind := gfkSolid;            // VCL: gfkNone is NOT transparent (opaque window, shows white);
+  ht.Fill.Color := Self.Color;         // use the parent's colour. FMX/WEB: gfkNone works.
   ht.Stroke.Kind := gskNone;
   ht.BitmapContainer := TMSFNCBitmapContainer1;
   ht.Text := '<b>Status:</b> <font color="#008000">online</font><br>' +
@@ -194,6 +196,7 @@ end;
 
 ## Does not exist / common mistakes
 
+- `&amp;` / `&#38;` / a bare `&` for an ampersand: FNC text treats `&` as a hotkey prefix (VCL and FMX; HTMLText, TableView, TreeView item text). A bare `&` disappears and underlines the next character, `&amp;` renders as `amp;`. Write `&&` (verified: `'R&&D'` shows `R&D`).
 - `TTMSFNCHTMLText.Caption`, `.HTML`, `.HTMLText`, `OnLinkClick`, `OnAnchorHint` — use `Text` and `OnAnchorClick`.
 - `TTMSFNCLabel`, `TTMSFNCHTMLLabel`, `THTMLabel`/`TAdvHTMLLabel` equivalents — use `TTMSFNCHTMLText`.
 - Unquoted attributes (`<font color=red>`, `<a href=x>`) — values must be double-quoted.

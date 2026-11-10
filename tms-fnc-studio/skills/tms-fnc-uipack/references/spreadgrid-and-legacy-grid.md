@@ -1,4 +1,5 @@
 # Spreadsheet grid and legacy grid (TTMSFNCSpreadGrid, TTMSFNCGrid)
+> Sections (line ranges): 8-31 Units and palette · 32-214 TTMSFNCSpreadGrid · 215-311 TTMSFNCGrid · 312-349 TTMSFNCGrid → TTMSFNCDataGrid mapping · 350-356 Platform notes · 357-376 Does not exist / common mistakes
 
 Verified against `tms.fnc.uipack\Source` v7.3.1.2: `*.TMSFNCSpreadGrid`, `*.TMSFNCSpreadGridTypes`, `*.TMSFNCSpreadGridLibs`, `*.TMSFNCFormulaParser`, `*.TMSFNCGrid`, `*.TMSFNCCustomGrid`, `*.TMSFNCGridData`, `*.TMSFNCGridOptions`, `*.TMSFNCGridCell`, `*.TMSFNCGridDatabaseAdapter`, `*.TMSFNCGridPDFIO`, `*.TMSFNCGridPrintIO`, `*.TMSFNCGridToolBarPopup`. The DataGrid side of the mapping table was checked in `*.TMSFNCDataGrid*.pas`.
 

@@ -1,4 +1,5 @@
 # FNC graphics and custom painting (TTMSFNCGraphics, TTMSFNCGraphicsFill / Stroke / Font, TTMSFNCCustomControl.Draw)
+> Sections (line ranges): 8-19 Units · 20-75 Creating a graphics object · 76-126 Fill, stroke, font · 127-183 Drawing methods · 184-198 Bitmaps · 199-217 Text and HTML · 218-302 Custom control: override Draw · 303-318 Color helpers · 319-324 Platform notes · 325-347 Does not exist / common mistakes
 
 Verified against TMS FNC Core 4.5.0.0: `VCL.TMSFNCGraphics`, `VCL.TMSFNCGraphicsTypes`, `VCL.TMSFNCGraphicsTools`, `VCL.TMSFNCHTMLEngine`, `VCL.TMSFNCCustomControl`, `VCL.TMSFNCTypes` (FMX/WEB copies checked for differences). Demo: `tms.fnc.core.demos\VCL\DataBinding` (`THTMLPaintBox.Paint`), UI Pack `Shared Code\Business Logic\SVG\UBL.pas`.
 
@@ -295,6 +296,9 @@ end;
 ```
 
 Paint order in `TTMSFNCCustomControl.DrawControl`: `OnBeforeDraw(Sender, AGraphics, ARect, ADefaultDraw)` → if `ADefaultDraw`: `DrawBackground` → `Draw` → `OnAfterDraw`. Use `OnAfterDraw` to decorate an existing FNC control without subclassing. Call `Invalidate` to repaint; `BeginUpdate/EndUpdate` around bulk changes.
+
+- `DrawBackground` fills the whole control with `Fill` and outlines it with the default grey `Stroke`. When `Draw` paints a rounded card, that rectangle shows in the corners. In the constructor set `Fill.Kind := gfkSolid; Fill.Color := <parent/page colour>; Stroke.Kind := gskNone;`. On VCL, `gfkNone` does **not** make the control see-through (it is an opaque window); only `TTMSFNCPanel`, `TTMSFNCToolBar` and `TTMSFNCFilterView` publish `Transparent`.
+- Don't name a drawing helper `Text`, `Fill`, `Font`, `Color` or `Width`: inside a method of a control descendant the inherited member wins, and calls like `Text(G, R, 'x')` fail with E2066.
 
 ## Color helpers
 

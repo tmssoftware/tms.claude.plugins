@@ -1,4 +1,5 @@
 # Code editor memo (TTMSFNCMemo, TTMSFNCMemoCustomLanguage, TTMSFNCMemoCustomTheme)
+> Sections (line ranges): 8-24 Units, palette, platforms · 25-47 Key published properties · 48-83 Public methods · 84-97 Events · 98-132 Example: basic setup, completion, breakpoints · 133-149 Multiple sources · 150-180 Custom language and theme · 181-185 Platform notes · 186-198 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source: `*.TMSFNCMemo`, `*.TMSFNCMemoCustomLanguage`, `*.TMSFNCMemoCustomTheme`, `*.TMSFNCMemoReg` (base class from FNC Core 4.5.0.0 `*.TMSFNCCustomWEBControl` / `*.TMSFNCWebBrowser`).
 

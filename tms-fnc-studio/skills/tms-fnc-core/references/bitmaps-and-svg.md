@@ -1,4 +1,5 @@
 # Bitmaps, containers and SVG (TTMSFNCBitmap, TTMSFNCBitmapContainer, TTMSFNCURLBitmapContainer, TTMSFNCSVGImageCollection)
+> Sections (line ranges): 6-17 Units and palette · 18-65 TTMSFNCBitmap: what it really is · 66-89 SVG engine and options · 90-144 TTMSFNCBitmapContainer · 145-168 TTMSFNCURLBitmapContainer · 169-191 TTMSFNCSVGImageCollection · 192-198 Platform notes · 199-215 Does not exist / common mistakes
 
 Verified against TMS FNC Core 4.5.0.0: `VCL/FMX/WEBLib.TMSFNCTypes`, `*.TMSFNCBitmapContainer`, `*.TMSFNCURLBitmapContainer`, `*.TMSFNCGraphicsSVGEngine`, `*.TMSFNCGraphics.Win/General`, `*.TMSFNCBitmapContainerReg`, `VCL.TMSFNCGeneralRegDE`. Demos: `tms.fnc.core.demos\VCL\SVG VirtualImageList`, UI Pack `Shared Code\Business Logic\SVG\UBL.pas` and `PDFLib BMI\UBL.pas`.
 

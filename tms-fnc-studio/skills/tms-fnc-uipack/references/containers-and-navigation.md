@@ -1,4 +1,5 @@
 # Containers & navigation (TTMSFNCPanel, TTMSFNCPageControl, TTMSFNCTabSet, TTMSFNCNavigationPanel, TTMSFNCPageSlider, TTMSFNCRibbon, TTMSFNCToolBar, TTMSFNCStatusBar, TTMSFNCSplitter, TTMSFNCTrayIcon)
+> Sections (line ranges): 6-26 Units and palette · 27-58 TTMSFNCPanel · 59-128 TTMSFNCTabSet · 129-176 TTMSFNCNavigationPanel · 177-203 TTMSFNCPageSlider · 204-254 TTMSFNCRibbon · 255-287 TTMSFNCToolBar and pickers · 288-310 TTMSFNCStatusBar · 311-328 TTMSFNCSplitter · 329-355 TTMSFNCTrayIcon · 356-361 Platform notes · 362-377 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source (`VCL.TMSFNCPanel`, `VCL.TMSFNCTabSet`, `VCL.TMSFNCPageControl`, `VCL.TMSFNCNavigationPanel`, `VCL.TMSFNCPageSlider`, `VCL.TMSFNCRibbon`, `VCL.TMSFNCToolBar`, `VCL.TMSFNCToolBars`, `VCL.TMSFNCToolBarPopup`, `VCL.TMSFNCStatusBar`, `VCL.TMSFNCSplitter`, `VCL.TMSFNCTrayIcon`) and the VCL demos `TabSet_PageControl`, `NavigationPanel`, `Ribbon`.
 

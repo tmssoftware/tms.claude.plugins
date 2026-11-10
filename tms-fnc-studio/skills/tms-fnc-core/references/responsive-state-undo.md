@@ -1,4 +1,5 @@
 # Responsive layouts, state management, undo, scroll bar, toggle button (TTMSFNCResponsiveManager, TTMSFNCUndoManager, TTMSFNCScrollBar, TTMSFNCToggleButton)
+> Sections (line ranges): 6-17 Units and palette · 18-98 TTMSFNCResponsiveManager · 99-102 TTMSFNCCustomStateManager · 103-143 TTMSFNCUndoManager · 144-168 TTMSFNCScrollBar · 169-172 TTMSFNCToggleButton · 173-177 Platform notes · 178-189 Does not exist / common mistakes
 
 Verified against TMS FNC Core 4.5.0.0 source: `*.TMSFNCResponsiveManager`, `*.TMSFNCStateManager`, `*.TMSFNCUndo`, `*.TMSFNCCustomControl`, `*.TMSFNCScrollBar`, `*.TMSFNCToggleButton`.
 

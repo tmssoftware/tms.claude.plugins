@@ -1,4 +1,5 @@
 # Filter row (TTMSFNCDataGrid)
+> Sections (line ranges): 6-22 Options.Filtering · 23-48 Setup · 49-83 Per-column filter-row settings · 84-137 Filtering in code · 138-143 Platform notes · 144-153 Does not exist / common mistakes
 
 The "filter row" is part of the core filtering (`Options.Filtering`, `*.TMSFNCDataGridData`), not a separate component. A **fixed** row (chosen by `Options.Filtering.Row`) shows per-column filter controls: a drop-down button (`gfcButton`, checklist popup) and/or an inline editor panel (`gfcEditor`: edit box + filter-type button + clear button). Filtering in code uses the same `Filter` collection.
 

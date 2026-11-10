@@ -8,7 +8,7 @@ description: >
   It adds a working FNC component with sample data to the user's project and explains what was done.
 argument-hint: "[component]"
 metadata:
-  version: "0.2.0"
+  version: "0.2.1"
 ---
 
 # Get started with TMS FNC UI Pack and TMS FNC Core
@@ -22,6 +22,7 @@ Before writing any FNC code, load the skill that covers the component and read i
 | Component | Skill | Read first |
 |---|---|---|
 | `TTMSFNCDataGrid` (+ database adapter, PDF/Excel/print IO) | `tms-fnc-datagrid` | `setup-and-install.md`, `core-api.md` |
+| A dashboard (KPI cards, charts, several controls styled together) | `tms-fnc-uipack` + `tms-fnc-core` | `dashboards.md` (uipack), then each control's file and core `graphics.md` |
 | Any other UI Pack control (TreeView, Planner, RichEditor, Memo, Kanban, lists, edits, pickers, buttons, page control, ribbon, dialogs, SpreadGrid, ...) | `tms-fnc-uipack` | `setup-and-components.md`, then the component's file |
 | FNC Core features (graphics, bitmaps/SVG, PDF, printing, web browser, popups, JSON, persistence, REST/cloud base, styles, responsive manager) | `tms-fnc-core` | `setup-and-install.md`, then the topic file |
 

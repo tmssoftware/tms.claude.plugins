@@ -1,4 +1,5 @@
 # TMS FNC DataGrid – core API reference
+> Sections (line ranges): 7-41 Uses clauses · 42-57 Class hierarchy · 58-84 Key types · 85-103 Dimensions · 104-128 Cell data access · 129-176 Structure and update methods · 177-216 Loading and saving · 217-281 Columns · 282-324 Appearance and layout · 325-355 Selection · 356-363 Row index mapping · 364-389 Most-used events · 390-408 Does not exist / common mistakes
 
 Verified against `tms.fnc.uipack\Source\*.TMSFNCDataGrid*.pas`. The published API of
 `TTMSFNCDataGrid` is identical in VCL, FMX and WEB; only unit prefixes and a few type aliases differ.
@@ -256,9 +257,14 @@ Grid.Columns[3].Width := 90;
 Grid.Columns[3].AddSetting(gcsFormatting);
 Grid.Columns[3].Formatting.&Type := gdftFloat;
 Grid.Columns[3].Formatting.Format := '#,##0.00';       // FormatFloat syntax
+// gcsAppearance replaces Grid.CellAppearance for EVERY state of this column (band rows, header, filter row,
+// selection) with the column's own defaults. Style the grid first, copy it, then change what differs:
 Grid.Columns[3].AddSetting(gcsAppearance);
+Grid.Columns[3].Appearance.Assign(Grid.CellAppearance);
 Grid.Columns[3].Appearance.NormalLayout.TextAlign := gtaTrailing;   // right-align
+Grid.Columns[3].Appearance.BandLayout.TextAlign := gtaTrailing;     // banded rows too
 ```
+Only setting `NormalLayout` leaves banded rows left-aligned on a pale yellow fill and the column's header/filter cells unstyled. For alignment alone, `OnGetCellLayout` (`ACell.Layout.TextAlign := gtaTrailing` for that column) avoids the column appearance entirely.
 
 `TTMSFNCDataGridDataFormattingType = (gdftDefault, gdftBoolean, gdftDateTime, gdftDate, gdftTime,
 gdftFloat, gdftNumber)`. `gdftDefault` passes `Format` to `Format()` with the text (`'%s pcs'`).
@@ -297,7 +303,7 @@ They are not the column header row. Column captions are row 0 (`Cells[c, 0]` / `
 
 Banding: `Options.Banding.Enabled := True` (`BandRowCount`, `NormalRowCount`), styled by
 `CellAppearance.BandLayout`. There is no hover-highlight layout. Column stretching:
-`Options.Column.Stretching.Enabled := True` (`Mode: gstmIndex|gstmAll|gstmProportional`, `Index`).
+`Options.Column.Stretching.Enabled := True` (`Mode: gstmIndex|gstmAll|gstmProportional`, `Index`). Set it after `EndUpdate`: with `gstmProportional` inside an update bracket all columns end up 0 wide and the grid paints blank.
 
 Dynamic per-cell styling (demo pattern):
 ```delphi
@@ -389,7 +395,7 @@ For editing events see editing.md. For sort and filter events see sorting-filter
 | `Values[c,r]`, `Cells[c,r]` as string | `Cells` is `TValue`/`JSValue`; read text with `Strings[c,r]` |
 | `Grid.Options := [goEditing, ...]` | `Options` is an object: `Options.Editing.Enabled`, `Options.Selection.Mode`, ... |
 | `Grid.Appearance.*` | `CellAppearance.*Layout`, `Fill`, `Stroke`, `GlobalFont` |
-| `Columns[i].Alignment`, `Columns[i].Color`, `Columns[i].Font` | `AddSetting(gcsAppearance)` + `Columns[i].Appearance.NormalLayout.TextAlign/Fill/Font` |
+| `Columns[i].Alignment`, `Columns[i].Color`, `Columns[i].Font` | `AddSetting(gcsAppearance)` + `Columns[i].Appearance.Assign(Grid.CellAppearance)`, then `NormalLayout`/`BandLayout` `.TextAlign/Fill/Font`; or `OnGetCellLayout` |
 | Setting `Columns[i].Editor` in code and nothing happens | You forgot `Columns[i].AddSetting(gcsEditor)` (same for Formatting, ReadOnly, Type, ...) |
 | `RemoveRows`, `ClearRows`, `AddRow(n)` | `DeleteRows(ARow, ACount)`, `ClearData`, `AddRow` (no params) / `RowCount := n` |
 | `LoadFromStrings`, `LoadFromArray`, `LoadFromCSV` | `LoadFromCSVData`, `LoadFromJSONTextData`, `LoadFromCSVStreamData` |

@@ -1,4 +1,5 @@
 # Utilities and JSON (TTMSFNCUtils, TTMSFNCJSONReader, TTMSFNCJSONWriter, TMS.TMSFNCValue)
+> Sections (line ranges): 6-18 Units · 19-84 TTMSFNCUtils: most used class methods · 85-143 TTMSFNCUtils JSON helpers · 144-188 JSON class helpers · 189-259 TTMSFNCJSONWriter / TTMSFNCJSONReader · 260-283 TMS.TMSFNCValue · 284-287 Next.Core.Promises / Next.Core.TTry · 288-294 Platform notes · 295-309 Does not exist / common mistakes
 
 Verified against TMS FNC Core 4.5.0.0 source: `*.TMSFNCUtils`, `*.TMSFNCTypes` (JSON class helpers), `*.TMSFNCJSONReader`, `*.TMSFNCJSONWriter`, `TMS.TMSFNCValue`, `Next.Core.Promises`, `Next.Core.TTry`; demos `tms.fnc.core.demos\VCL\TMSFNCCloudBase`, `WEB\TMSFNCCloudBase`.
 

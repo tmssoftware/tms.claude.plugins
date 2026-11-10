@@ -1,4 +1,5 @@
 # Date and time controls (TTMSFNCCalendar, TTMSFNCDatePicker, TTMSFNCDateTimePicker, TTMSFNCAnalogTimePicker/Selector, TTMSFNCDigitalTimePicker/Selector)
+> Sections (line ranges): 6-21 Units, palette, platforms · 22-115 TTMSFNCCalendar · 116-144 TTMSFNCDatePicker · 145-163 TTMSFNCDateTimePicker · 164-189 Analog time: TTMSFNCAnalogTimeSelector · 190-217 Digital time: TTMSFNCDigitalTimeSelector · 218-223 Platform notes · 224-238 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source: `*.TMSFNCCalendar`, `*.TMSFNCDatePicker`, `*.TMSFNCDateTimePicker`, `*.TMSFNCAnalogTimePicker`, `*.TMSFNCAnalogTimeSelector`, `*.TMSFNCDigitalTimePicker`, `*.TMSFNCDigitalTimeSelector`, `*.TMSFNCCustomPicker`, the `*Reg.pas` units and the demos `Calendar` and `Pickers` (VCL/FMX).
 
