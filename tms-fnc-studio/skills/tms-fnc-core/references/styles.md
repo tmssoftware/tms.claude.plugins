@@ -1,4 +1,5 @@
 # Styles (TTMSFNCStylesManager, TTMSFNCStyles, AdaptToStyle)
+> Sections (line ranges): 11-15 Units and palette · 16-57 TTMSFNCStylesManager · 58-88 Built-in styles · 89-124 Custom styles: create, load, combine · 125-162 AdaptToStyle · 163-167 Platform notes · 168-184 Does not exist / common mistakes
 
 Verified against TMS FNC Core 4.5.0.0: `VCL/FMX/WEBLib.TMSFNCStyles`, `*.TMSFNCStylesEditor`, `*.TMSFNCStylesReg`, `*.TMSFNCCustomControl` (`AdaptToStyle`, `ApplyStyle`), `*.TMSFNCPersistence`, `VCL.TMSFNCGeneralDE` (design-time verbs), and the resource names inside `Source\TMSFNCStylesResources.res`. There is no styles demo in `tms.fnc.core.demos` or `tms.fnc.uipack.demos`.
 
@@ -71,6 +72,19 @@ end;
 ```
 
 `StyleResource` only reloads when the value changes; to re-apply the same style call `LoadStyleFromResource` directly. Use the upper-case names shown above.
+
+Order matters when you combine a built-in style with your own look (verified on VCL, UI Pack 7.3):
+
+```delphi
+Styles := TTMSFNCStylesManager.Create(Self);       // owner = the form
+Styles.Options.AdaptFormColor := False;            // default True: every load also sets Form.Color (VCL) / Fill (FMX),
+                                                   // even when AComponents restricts the load
+Styles.LoadStyleFromResource('TTMSFNCSTYLE_FNC_DARK', [Board, Planner, StatusBar]);  // only these controls
+Planner.ItemsAppearance.Fill.Color := ...;         // customise AFTER loading: the load overwrites fonts, fills,
+                                                   // templates, row heights and item colours set earlier
+```
+
+Leave controls you style completely by hand (HTMLText, custom-drawn cards) out of the array, or the style resets them.
 
 ## Custom styles: create, load, combine
 
@@ -165,4 +179,5 @@ end;
 | `StylesManager.RegisterControl(...)` / `Components.Add` | it styles components owned by the form (`StyleForm`); create runtime controls with `Create(Self)` or pass them in `AComponents` |
 | Expecting `AdaptToStyle` to apply the manager's FNC style | separate mechanisms; `AdaptToStyle` follows VCL/FMX/CSS styles |
 | `AdaptToStyle` with the VCL "Windows" style | ignored by design (`StyleServicesEnabled` returns False) |
+| Expecting `LoadStyleFromResource(..., [SomeControl])` to leave the form colour alone | it still applies `FormColor`; set `Options.AdaptFormColor := False` first |
 | `TTMSFNCGraphicsAppearance` class | does not exist; appearance lives in each control's `Fill`/`Stroke`/`Font`/`*Appearance` properties (`TTMSFNCGraphicsFillEditor`/`TTMSFNCGraphicsStrokeEditor` are design-time editors) |

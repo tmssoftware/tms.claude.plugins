@@ -1,4 +1,5 @@
 # TMS FNC DataGrid: PDF, Excel and print export
+> Sections (line ranges): 35-185 PDF: TTMSFNCDataGridPDFIO · 186-261 Excel · 262-311 Printing: TTMSFNCDataGridPrintIO · 312-315 Other built-in export · 316-333 Does not exist / common mistakes
 
 There are three non-visual components, all on palette page `TMS FNC UI`, and all linked to the grid via a published **`DataGrid`** property:
 

@@ -1,4 +1,5 @@
 # Conditional formatting (TTMSFNCDataGrid)
+> Sections (line ranges): 11-43 Collection: TTMSFNCDataGridConditionalFormatting · 44-60 Rule item: TTMSFNCDataGridFormatRuleItem · 61-86 Enums · 87-95 Priority and conflict resolution · 96-107 Expression rules · 108-155 Demo · 156-159 Platform notes · 160-168 Does not exist / common mistakes
 
 Declarative, Excel-style rules evaluated while painting. Not a separate component: a rule collection on the grid / renderer.
 

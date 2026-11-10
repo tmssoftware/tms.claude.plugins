@@ -1,4 +1,5 @@
 # TMS FNC DataGrid: database binding
+> Sections (line ranges): 7-58 How it is wired · 59-105 Published properties · 106-165 Column mapping · 166-193 Editing and write-back · 194-207 LoadMode: who sorts, filters, groups · 208-242 Filtering and sorting from code · 243-272 FireDAC · 273-276 ClientDataSet · 277-314 Master-detail · 315-318 StellarDS · 319-336 Does not exist / common mistakes
 
 Units: `VCL.TMSFNCDataGridDatabaseAdapter` / `FMX.TMSFNCDataGridDatabaseAdapter` / `WEBLib.TMSFNCDataGridDatabaseAdapter`, plus `Data.DB` (`DB` on WEB).
 Verified against `VCL.TMSFNCDataGridDatabaseAdapter.pas` (adapter v1.1.1.1) and the UI Pack demos in `{VCL,FMX}\DataGrid\Database\`.

@@ -1,4 +1,5 @@
 # Tree view (TTMSFNCTreeView, TTMSFNCCheckedTreeView, TTMSFNCDirectoryTreeView, TTMSFNCTreeViewDatabaseAdapter)
+> Sections (line ranges): 11-23 Units and palette · 24-46 Columns · 47-124 Collection mode: nodes · 125-171 Virtual mode · 172-213 Selection, expand/collapse, checks, editing · 214-229 Sorting and filtering · 230-233 Appearance · 234-242 TTMSFNCCheckedTreeView · 243-265 TTMSFNCDirectoryTreeView · 266-291 Showing dataset data · 292-310 TTMSFNCTreeViewDatabaseAdapter · 311-316 Platform notes · 317-333 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source: `*.TMSFNCTreeView`, `*.TMSFNCCustomTreeView`, `*.TMSFNCTreeViewData`, `*.TMSFNCTreeViewBase`, `*.TMSFNCCheckedTreeView`, `*.TMSFNCDirectoryTreeView`, `*.TMSFNCTreeViewDatabaseAdapter`, demo `VCL\TreeView`.
 
@@ -71,6 +72,8 @@ property VirtualNode: TTMSFNCTreeViewVirtualNode;
 function GetParent: TTMSFNCTreeViewNode;  function GetChildCount: Integer;
 function GetFirstChild / GetLastChild / GetNext / GetPrevious / GetNextSibling / GetPreviousSibling: TTMSFNCTreeViewNode;
 procedure Expand(ARecurse: Boolean = False);  procedure Collapse(ARecurse: Boolean = False);
+// Expand/Collapse/ExpandAll act on the built (virtual) node list, which doesn't exist yet inside BeginUpdate:
+// there they do nothing. While filling, set Node.Expanded := True; or call Expand/ExpandAll after EndUpdate.
 procedure MoveTo(ADestination: TTMSFNCTreeViewNode; AIndex: Integer = -1);
 procedure CopyTo(ADestination: TTMSFNCTreeViewNode; AIndex: Integer = -1);
 ```
@@ -111,10 +114,10 @@ begin
     n.Checked[0] := True;
     n.CollapsedIconNames[0, False] := 'cake1.png';   // requires TreeView.BitmapContainer
     n.ExpandedIconNames[0, False] := 'cake1.png';
-    TMSFNCTreeView1.ExpandAll;
   finally
     TMSFNCTreeView1.EndUpdate;
   end;
+  TMSFNCTreeView1.ExpandAll;                // after EndUpdate: inside the update it does nothing
 end;
 ```
 Runtime creation: `TV := TTMSFNCTreeView.Create(Self); TV.Parent := Self; TV.Align := alClient;` (FMX: `TAlignLayout.Client`), then the code above.

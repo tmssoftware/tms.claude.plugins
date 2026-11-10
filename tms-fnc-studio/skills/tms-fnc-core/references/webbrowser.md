@@ -1,4 +1,5 @@
 # Web browser controls (TTMSFNCWebBrowser, TTMSFNCEdgeWebBrowser, TTMSFNCWebCoreClientBrowser)
+> Sections (line ranges): 6-17 Units and palette · 18-146 TTMSFNCWebBrowser: core API · 147-195 TTMSFNCEdgeWebBrowser: WebView2-only extras · 196-203 WebView2 runtime and loader DLL · 204-226 TTMSFNCWebCoreClientBrowser · 227-233 Platform notes · 234-246 Does not exist / common mistakes
 
 Verified against TMS FNC Core 4.5.0.0 source: `*.TMSFNCWebBrowser`, `*.TMSFNCWebBrowser.Win`, `WEBLib.TMSFNCWebBrowser.WEB`, `*.TMSFNCEdgeWebBrowser`, `*.TMSFNCWebCoreClientBrowser`.
 

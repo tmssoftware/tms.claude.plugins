@@ -19,6 +19,15 @@ In Claude Code:
 
 Each plugin needs the matching TMS product installed in your IDE (for example via TMS Smart Setup: `tms install tms.fnc.uipack`).
 
+## Maintaining
+
+Line 2 of every skill reference file is a generated section map (`> Sections (line ranges): ...`) that lets agents read only the lines they need. After editing a reference, regenerate the maps:
+
+```
+python scripts/update-section-maps.py           # rewrite
+python scripts/update-section-maps.py --check   # exit 1 if a map is stale
+```
+
 ## License
 
 Proprietary, © TMS Software. See [LICENSE](LICENSE).

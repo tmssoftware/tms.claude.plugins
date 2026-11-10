@@ -1,4 +1,5 @@
 # Kanban board (TTMSFNCKanbanBoard, TTMSFNCKanbanBoardDatabaseAdapter)
+> Sections (line ranges): 8-17 Units and palette · 18-50 Columns · 51-83 Items · 84-100 Board-level members · 101-117 Events · 118-164 Example: board built in code · 165-208 TTMSFNCKanbanBoardDatabaseAdapter · 209-213 Platform notes · 214-227 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source: `*.TMSFNCKanbanBoard`, `*.TMSFNCKanbanBoardDatabaseAdapter`; demo `Shared Code\Business Logic\Kanban Board\UBL.pas` (used by `VCL\Kanban Board`, `FMX\Kanban Board`, LCL and WEB).
 

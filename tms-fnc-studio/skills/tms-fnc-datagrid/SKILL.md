@@ -9,7 +9,7 @@ description: >
   bind to a database, or export a TMS FNC data grid. Read it before writing or reviewing any TMS FNC DataGrid code,
   because the real API differs from TStringGrid, TAdvStringGrid and the older TTMSFNCGrid.
 metadata:
-  version: "0.1.4"
+  version: "0.2.0"
 ---
 
 # TMS FNC DataGrid API knowledge
@@ -18,9 +18,10 @@ TTMSFNCDataGrid is the data grid in the TMS FNC UI Pack (product id `tms.fnc.uip
 
 ## Ground rules
 
-- **Never guess member names.** Use only members in the reference files below. If something isn't covered, don't fall back on reading component source code: many users have trial or DCU-only installs without it, so the plugin must work from these references alone. Instead, in this order: (1) check the official API reference at https://doc.tmssoftware.com/fnc/uipack/datagrid/ if web access is available, treating it as secondary (when it conflicts with these references, these win); (2) write the smallest use of the member and let the compiler confirm it ("Undeclared identifier" means it doesn't exist); (3) otherwise tell the user the member is unverified and suggest checking it with Code Insight in the IDE. Never invent a name.
+- **Never guess member names.** Use only members in these references. If one isn't covered, don't read component source (many installs are trial/DCU-only): check https://doc.tmssoftware.com/fnc/uipack/datagrid/ if web access is available (these references win on conflicts), else compile the smallest use and let the compiler confirm it, else tell the user the member is unverified.
 - **Don't carry over names from other grids.** TStringGrid, TAdvStringGrid and the older TTMSFNCGrid have similar-looking but different APIs. Each reference file ends with a "Does not exist / common mistakes" list; check it.
 - **Match the framework.** All TMS units in a form use the same prefix as the project's framework.
+- **New project from code**: a hand-written `.dpr` must not contain `{$R *.res}` unless the `.res` exists (E1026). Non-FNC types need their own units: VCL `TPngImage` → `Vcl.Imaging.pngimage`; FMX `TBrushKind`/`TBitmap` → `FMX.Graphics`, `TAlignLayout` → `FMX.Types`, `TAlphaColors`/`TFontStyle` → `System.UITypes`; `TRectF`/`PointF` → `System.Types`.
 - **Bracket bulk changes** with `BeginUpdate` / `EndUpdate`.
 - Prefer patterns from the reference files (derived from the official demos) over invented approaches.
 
@@ -43,10 +44,12 @@ TTMSFNCDataGrid is the data grid in the TMS FNC UI Pack (product id `tms.fnc.uip
 15. Display text is computed when a value is written. Assign `OnGetCellFormatting` / `OnGetCellDisplayValue` and column formats **before** filling the grid, and set `FormatSettings` separators at startup when a fixed number format (e.g. `€ 12,345.00`) is required. Otherwise the Windows locale decides.
 16. A data checkbox column still draws `True`/`False` behind the checkbox. Hide the text (`ACell.Layout.Font.Color := TAlphaColors.Null` in `OnGetCellLayout`), never the value.
 17. For a styled or "dashboard" grid, start from the recipe in `references/styling.md` instead of discovering layout properties one build at a time. To check the look, have the app save an image of itself. Never capture the user's whole desktop.
+18. **Blank grid**: set `Options.Column.Stretching` (above all `Mode := gstmProportional`) **after** `EndUpdate`. Enabled + proportional inside `BeginUpdate`/`EndUpdate` zeroes every column width and the grid paints empty, with no error.
+19. Column-level settings cover **all** rows of that column. `AddSetting(gcsAppearance)` swaps in the column's own default layouts (copy first: `Columns[i].Appearance.Assign(Grid.CellAppearance)`), and `gcsFormatting` also formats group headers and summaries (dates show `1899-12-30`, totals `$0.00`). When grouping, format in `OnGetCellFormatting` and skip rows where `RowTypes[ARow] <> grtDefault` (`grouping.md`).
 
 ## Reference files
 
-Read the file(s) for the task at hand. Don't load all of them.
+How to read them (saves most of the tokens and time): line 2 of every file is a section map, `> Sections (line ranges): 6-26 Units · 27-58 ...`. Read the first 2 lines, then only the line ranges you need (Read with offset/limit, `sed -n '27,58p'`, or `Get-Content f | Select-Object -Skip 26 -First 32`), plus the last section ("Does not exist / common mistakes") when you write code for that feature. Every command is another full model round trip, so batch: read the maps of all files you need in one command, then all needed ranges in one or two commands (keep each output under ~40 KB). Never dump whole files: long outputs get truncated and re-read.
 
 | File | Covers |
 |---|---|

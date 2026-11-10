@@ -1,4 +1,5 @@
 # TMS FNC UI Pack: component catalog and shared conventions (all UI Pack controls)
+> Sections (line ranges): 6-15 Install, packages, unit prefixes · 16-107 Component catalog · 108-141 Shared FNC conventions · 142-180 Example: building a small UI in code · 181-188 Platform notes · 189-212 Does not exist / common mistakes
 
 Verified against: `tms.fnc.uipack` 7.3.1.2 (`version.txt`), every `*Reg.pas` unit in `Source`, the packages `Packages\d13\VCLTMSFNCUIPackPkg.dpk`, `FMXTMSFNCUIPackPkg.dpk`, `Packages\web\TMSFNCUIPackWEB.dpk`, `Packages\lazarus\LCLTMSFNCUIPackPkg.lpk`, and `tms.fnc.core` 4.5.0.0 (`VCL.TMSFNCCustomControl`, `VCL.TMSFNCCustomComponent`, `VCL.TMSFNCBitmapContainer`, `VCL.TMSFNCHTMLEngine`).
 

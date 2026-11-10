@@ -1,4 +1,5 @@
 # Cell controls and Grid in Grid (TTMSFNCDataGrid)
+> Sections (line ranges): 9-68 1. Built-in cell types · 69-119 2. Arbitrary controls: Controls[Col, Row] · 120-180 3. Grid in Grid · 181-185 Platform notes · 186-197 Does not exist / common mistakes
 
 Three mechanisms, all per cell (or per column):
 1. **Built-in cell types** — checkbox, radio button, button, progress bar, bitmap, created with `Add*` methods (or `Columns[i].Type`). The grid draws them itself; each has its own cell class.

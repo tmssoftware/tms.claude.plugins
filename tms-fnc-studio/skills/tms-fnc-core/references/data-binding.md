@@ -1,4 +1,5 @@
 # Data binding, FNC dataset and filters (TTMSFNCDataBinder, TTMSFNCDataSet, TTMSFNCDataLinkCSV/JSON, TTMSFNCFilterBuilder, TTMSFNCFilterRulesManager)
+> Sections (line ranges): 6-21 Units and palette · 22-97 TTMSFNCDataBinder: bind any control property to · 98-181 TTMSFNCDataSet + TTMSFNCDataLinkCSV · 182-255 TTMSFNCFilterBuilder: filter expressions in code · 256-309 TTMSFNCFilterRulesManager: filter + act on live · 310-315 Platform notes · 316-333 Does not exist / common mistakes
 
 Verified against TMS FNC Core 4.5.0.0 source: `*.TMSFNCDataBinding`, `TMS.TMSFNCDataSet`, `TMS.TMSFNCCustomDataLink`, `TMS.TMSFNCDataLinkCSV`, `TMS.TMSFNCDataLinkJSON`, `TMS.TMSFNCFilterBuilder`, `TMS.TMSFNCFilterStructure`, `TMS.TMSFNCFilterRulesManager`, the `*Reg.pas` units and `Packages\d13\*.dpk`; demos `tms.fnc.core.demos\VCL\DataBinding`, `WEB\TMSFNCDataBinding`, `VCL\TTMSFNCDataSet\CustomDataLink`, `VCL\TMSFNCFilterRulesManager\Grid Example` and `Panel Control Example`.
 

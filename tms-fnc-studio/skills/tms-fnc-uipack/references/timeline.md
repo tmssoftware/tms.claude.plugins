@@ -1,4 +1,5 @@
 # Timeline (TTMSFNCTimeline, TTMSFNCTimelineDatabaseAdapter)
+> Sections (line ranges): 8-18 Units, palette, platforms · 19-62 Values vs dates · 63-90 Indicators and sections · 91-107 Timeline control members · 108-150 Example · 151-173 Events · 174-203 TTMSFNCTimelineDatabaseAdapter · 204-207 Platform notes · 208-219 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source: `*.TMSFNCTimeline`, `*.TMSFNCTimelineDatabaseAdapter`, `*.TMSFNCTimelineReg`, `*.TMSFNCTimelineDatabaseAdapterReg` and the demos `Timeline\Positions`, `Timeline\Custom Drawing`, `Timeline\Timeline Database Adapter` (VCL/FMX/WEB).
 

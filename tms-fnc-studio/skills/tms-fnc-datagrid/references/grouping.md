@@ -1,4 +1,5 @@
 # Grouping (TTMSFNCDataGrid)
+> Sections (line ranges): 8-64 Group / Ungroup · 65-83 Options.Grouping · 84-109 Custom group text · 110-212 Group summaries / aggregates · 213-238 Expand / collapse · 239-273 Visual grouping · 274-277 Platform notes · 278-304 Does not exist / common mistakes
 
 Grouping is done in code with `Group` / `Ungroup` on the grid (implemented in `TTMSFNCDataGridData`, unit `*.TMSFNCDataGridData`; the grid forwards to its root renderer). Group header rows are node rows (`grtNode`); summary rows are `grtSummary`. Visual drag-and-drop grouping is a zone inside `Header` (see below).
 
@@ -286,3 +287,17 @@ Identical API on VCL/FMX/WEB. WEB demos load CSV with `LoadFromCSVData('train.cs
 - Inline anonymous methods passed straight into `Group` / `Group*` calls — assign them to a typed callback variable first (see above).
 - Expecting `OnGroup` after `Group()` in code — it only fires for visual grouping.
 - `Options.Grouping.Summary` already defaults to True; `MergeHeader` defaults to True.
+- Column-level number/date formats (`Columns[i].AddSetting(gcsFormatting)` + `Formatting`) in a grouped grid: they also hit the group header and summary rows, so the region name in column 0 shows as `1899-12-30` and a `'Total: $%.2n'` sum shows as `$0.00`. Format in `OnGetCellFormatting` instead, skipping non-data rows (verified):
+  ```delphi
+  if (ACell.Row < FGrid.FixedRowCount) or (FGrid.RowTypes[ACell.Row] <> grtDefault) then
+  begin
+    ACanFormat := False;
+    Exit;
+  end;
+  AConvertSettings.DecimalSeparator := '.';  AConvertSettings.ThousandSeparator := ',';
+  case ACell.Column of
+    0: begin AFormatting.&Type := gdftDate;  AFormatting.Format := 'yyyy-mm-dd'; end;
+    3: begin AFormatting.&Type := gdftFloat; AFormatting.Format := '"$"#,##0.00'; end;
+  end;
+  ```
+  Assign the handler before filling the grid (display text is computed when values are written).

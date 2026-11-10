@@ -1,4 +1,5 @@
 # Persistence to JSON (TTMSFNCPersistence, ITMSFNCPersistence, TTMSFNCObjectResolver)
+> Sections (line ranges): 6-15 Units · 16-24 How it works · 25-55 TTMSFNCPersistence · 56-100 Controls and components: SaveSettingsToFile · 101-145 Plain objects: TObject helper · 146-179 Interfaces for custom classes · 180-190 JSON to Delphi classes: TTMSFNCJSONToClass · 191-228 TTMSFNCObjectResolver · 229-234 Platform notes · 235-247 Does not exist / common mistakes
 
 Verified against TMS FNC Core 4.5.0.0 source: `*.TMSFNCPersistence`, `*.TMSFNCTypes` (`TTMSFNCObjectHelper`), `*.TMSFNCCustomControl`, `*.TMSFNCCustomComponent`, `TMS.TMSFNCObjectResolver`. No dedicated demo; the FilterRulesManager demos use the resolver path syntax.
 

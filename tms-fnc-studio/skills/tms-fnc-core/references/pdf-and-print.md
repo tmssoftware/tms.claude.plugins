@@ -1,4 +1,5 @@
 # PDF generation, PDF export and printing (TTMSFNCPDFLib, TTMSFNCGraphicsPDFIO, TTMSFNCGraphicsPrintIO, TTMSFNCPrinter)
+> Sections (line ranges): 6-18 Units and palette · 19-175 TTMSFNCPDFLib: generating a PDF · 176-220 TTMSFNCGraphicsPDFIO: export FNC controls to PDF · 221-286 Printing · 287-295 Platform notes · 296-310 Does not exist / common mistakes
 
 Verified against TMS FNC Core 4.5.0.0 source: `*.TMSFNCPDFLib`, `*.TMSFNCPDFGraphicsLib`, `*.TMSFNCPDFCoreLibBase`, `*.TMSFNCPDFRichTextLib`, `*.TMSFNCPDFIO`, `*.TMSFNCGraphicsPDFEngine`, `*.TMSFNCPrintIO`, `*.TMSFNCPrinters`.
 
@@ -191,6 +192,8 @@ procedure Save(const AFileName: String; AExportObjects: TTMSFNCPDFIOExportObject
 // OnBeforeDrawContent/OnAfterDrawContent, OnGetExportRect, OnCanCreateNewPage, OnAfterDraw(Sender; APDFLib: TTMSFNCPDFLib)
 ```
 Without an explicit rect, the export rect is the page `MediaBox` minus `Options.Margins`.
+
+The export calls only the export object's own drawing (its `Draw`, with `ARect` = the export rect). Child controls placed on it are **not** exported. For a dashboard, pass the controls as an array (one page each), or give a custom surface an export branch that paints everything itself into `ARect`, not at fixed screen coordinates.
 
 ```delphi
 uses VCL.TMSFNCGraphicsPDFEngine, VCL.TMSFNCPDFIO, VCL.TMSFNCPDFLib;

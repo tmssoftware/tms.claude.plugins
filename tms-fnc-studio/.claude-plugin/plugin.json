@@ -1,7 +1,7 @@
 {
   "name": "tms-fnc-studio",
   "displayName": "TMS FNC Studio",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "Build Delphi apps (VCL, FMX, TMS WEB Core) with TMS FNC UI Pack and TMS FNC Core: add DataGrid, TreeView, Planner, RichEditor, Kanban, inputs, pickers and more, use Core graphics, PDF, web browser, JSON and persistence, and review FNC code against the real API.",
   "author": {
     "name": "TMS Software",

@@ -1,4 +1,5 @@
 # Rich editor (TTMSFNCRichEditor, toolbars, ruler, IO components, TTMSFNCHTMLEditor)
+> Sections (line ranges): 6-23 Units, palette, platforms · 24-63 TTMSFNCRichEditor — content model · 64-136 Selection and formatting · 137-156 Find / replace, undo, clipboard, misc · 157-179 Merge fields · 180-227 Load / save · 228-252 Toolbars · 253-256 TTMSFNCRichEditorToolBarPopup · 257-265 TTMSFNCRichEditorHorizontalRuler · 266-274 TTMSFNCHTMLEditor · 275-280 Platform notes · 281-295 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source: `*.TMSFNCRichEditorBase`, `*.TMSFNCRichEditor`, `*.TMSFNCRichEditorToolBar`, `*.TMSFNCRichEditorToolBarPopup`, `*.TMSFNCRichEditorRuler`, `*.TMSFNCRichEditorIO`, `*.TMSFNCRichEditorPDFIO`, `*.TMSFNCRichEditorPrintIO`, `*.TMSFNCRichEditorEMailIO`, `*.TMSFNCHTMLEditor` (+ FNC Core 4.5.0.0 `TMSFNCPDFIO` / `TMSFNCPrintIO`).
 

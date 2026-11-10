@@ -1,4 +1,5 @@
 # TMS FNC DataGrid: setup and install
+> Sections (line ranges): 6-22 Product and packages · 23-51 Install with TMS Smart Setup · 52-62 Checking that it is installed · 63-108 Unit prefixes per framework · 109-134 Creating the grid in code · 135-189 Building from the command line · 190-198 TMS WEB Core specifics · 199-213 Does not exist / common mistakes
 
 Verified against the source: `tms.fnc.uipack` 7.3.1.2 (`version.txt`), its `tmsbuild.yaml`, the `Packages\d13\*.dpk` files, the `*Reg.pas` units, and TMS Smart Setup `tms.exe` 3.5 (`tms help ...` output).
 

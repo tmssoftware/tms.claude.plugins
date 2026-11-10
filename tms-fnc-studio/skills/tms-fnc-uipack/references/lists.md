@@ -1,4 +1,5 @@
 # List controls (TTMSFNCListBox, TTMSFNCCheckedListBox, TTMSFNCTableView, TTMSFNCTileList, TTMSFNCSearchList, TTMSFNCResponsiveList, TTMSFNCListEditor, TTMSFNCCategoryList)
+> Sections (line ranges): 21-72 TTMSFNCListBox · 73-93 TTMSFNCCheckedListBox · 94-151 TTMSFNCTableView · 152-195 TTMSFNCTileList · 196-234 TTMSFNCSearchList · 235-256 TTMSFNCResponsiveList · 257-268 TTMSFNCListEditor · 269-272 TTMSFNCCategoryList · 273-278 Platform notes · 279-290 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source: `*.TMSFNCListBox`, `*.TMSFNCCheckedListBox`, `*.TMSFNCTableView`, `*.TMSFNCTileList`, `*.TMSFNCSearchList`, `*.TMSFNCResponsiveList`, `*.TMSFNCListEditor`, `*.TMSFNCCategoryList`; demos `VCL\Listbox`, `VCL\TableView`, `VCL\TileList`, `VCL\SearchList`, `VCL\ResponsiveList`, `VCL\ListEditor`.
 
@@ -95,7 +96,9 @@ lb.EndUpdate;
 Also hosts an inner tree (`TreeView` property). Items can be grouped in alphabetic categories, have accessories, swipe "more options" and a detail control.
 ```delphi
 // TTMSFNCTableViewItem (published): Text, Bitmap, BitmapName, HTMLTemplateItems, Checked, CheckType (tvictNone/tvictCheckBox/tvictRadioButton),
-//   Accessory (tviaNone, tviaDetail, tviaProgress, tviaButton, tviaBadge, tviaCustom), AccessoryText, AccessoryProgress,
+//   Accessory (tviaNone, tviaDetail, tviaProgress, tviaButton, tviaBadge, tviaCustom), AccessoryText, AccessoryProgress (0..100),
+//   AccessoryColor / AccessoryFontColor (default gcNull = use ItemAppearance.AccessoryFill.Color / AccessoryFont.Color;
+//   the default progress colour is yellow-green, so set ItemAppearance.AccessoryFill.Color for a styled list),
 //   CategoryID, GroupIndex, DetailControl, Enabled, Visible, Height, TextColor, WordWrapping, HorizontalTextAlign, VerticalTextAlign
 // public: Title, TitleExpanded, Data*, DBKey, IsSelected
 function AddItem(AText: string = ''): TTMSFNCTableViewItem;   // or Items.Add

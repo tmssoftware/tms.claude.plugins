@@ -1,19 +1,16 @@
 ---
 name: tms-fnc-uipack
 description: >
-  Accurate API knowledge for the TMS FNC UI Pack controls (product tms.fnc.uipack) other than TTMSFNCDataGrid, in Delphi
-  for VCL, FMX and TMS WEB Core. This skill should be used whenever code references TTMSFNCTreeView, TTMSFNCPlanner,
-  TTMSFNCTimeline, TTMSFNCCalendar, TTMSFNCDatePicker, TTMSFNCRichEditor, TTMSFNCHTMLEditor, TTMSFNCMemo,
-  TTMSFNCHTMLText, TTMSFNCKanbanBoard, TTMSFNCListBox, TTMSFNCTableView, TTMSFNCTileList, TTMSFNCSearchList,
-  TTMSFNCResponsiveList, TTMSFNCEdit, TTMSFNCSpinEdit, TTMSFNCComboBox, TTMSFNCColorPicker or any other TMS FNC picker or
-  selector, TTMSFNCButton, TTMSFNCCheckBox, TTMSFNCSwitch, TTMSFNCTrackBar, TTMSFNCProgressBar, TTMSFNCPanel,
-  TTMSFNCPageControl, TTMSFNCTabSet, TTMSFNCNavigationPanel, TTMSFNCRibbon, TTMSFNCToolBar, TTMSFNCStatusBar,
-  TTMSFNCTaskDialog, TTMSFNCObjectInspector, TTMSFNCChat, TTMSFNCSpreadGrid or the older TTMSFNCGrid, or when the user
-  asks how to build a tree view, scheduler, rich text editor, code editor, kanban board, list, form inputs, navigation
-  or dialogs with TMS FNC. Read it before writing or reviewing any TMS FNC UI Pack code, because the real API differs
-  from VCL/FMX standard controls and TMS VCL UI Pack (TAdv*) components.
+  Accurate API knowledge for the TMS FNC UI Pack controls (tms.fnc.uipack) other than TTMSFNCDataGrid, in Delphi VCL,
+  FMX and TMS WEB Core. Use whenever code references a TTMSFNC UI Pack control (TreeView, Planner, Timeline, Calendar,
+  DatePicker, RichEditor, HTMLEditor, Memo, HTMLText, KanbanBoard, ListBox, TableView, TileList, Edit, SpinEdit,
+  ComboBox, pickers and selectors, Button, Switch, TrackBar, ProgressBar, Badge, Panel, PageControl, TabSet,
+  NavigationPanel, Ribbon, ToolBar, StatusBar, TaskDialog, Chat, SpreadGrid, the older TTMSFNCGrid), or when the user
+  asks to build a tree view, scheduler, rich text or code editor, kanban board, list, form inputs, navigation, dialogs
+  or a dashboard with TMS FNC. Read it before writing or reviewing UI Pack code: the real API differs from VCL/FMX
+  standard controls and TMS VCL UI Pack (TAdv*).
 metadata:
-  version: "0.2.0"
+  version: "0.3.1"
 ---
 
 # TMS FNC UI Pack API knowledge
@@ -22,9 +19,10 @@ TMS FNC UI Pack (product id `tms.fnc.uipack`, version 7.3, depends on TMS FNC Co
 
 ## Ground rules
 
-- **Never guess member names.** Use only members in the reference files below. If something isn't covered, don't fall back on reading component source code: many users have trial or DCU-only installs without it, so the plugin must work from these references alone. Instead, in this order: (1) check the official API reference at https://doc.tmssoftware.com/fnc/uipack/ if web access is available, treating it as secondary (when it conflicts with these references, these win); (2) write the smallest use of the member and let the compiler confirm it ("Undeclared identifier" means it doesn't exist); (3) otherwise tell the user the member is unverified and suggest checking it with Code Insight in the IDE. Never invent a name.
+- **Never guess member names.** Use only members in these references. If one isn't covered, don't read component source (many installs are trial/DCU-only): check https://doc.tmssoftware.com/fnc/uipack/ if web access is available (these references win on conflicts), else compile the smallest use and let the compiler confirm it, else tell the user the member is unverified.
 - **Don't carry over names** from VCL/FMX standard controls (`TTreeView`, `TListBox`, `TRichEdit`, `TPageControl`, ...), TMS VCL UI Pack (`TAdv*`) or another FNC control. Each control has its own item class and enum prefix. Each reference file ends with a "Does not exist / common mistakes" list; check it.
 - **Match the framework**, and check that the control exists for it. These are **not available on TMS WEB Core**: RichEditor (and its toolbars and IO), HTMLEditor, SpreadGrid, SearchEdit, SearchList, ResponsiveList, DirectoryEdit, DirectoryTreeView, DataSetFilterDialog, and the Grid and Planner toolbar popups.
+- **New project from code**: a hand-written `.dpr` must not contain `{$R *.res}` unless the `.res` exists (E1026). Non-FNC types need their own units: VCL `TPngImage` → `Vcl.Imaging.pngimage`; FMX `TBrushKind`/`TBitmap` → `FMX.Graphics`, `TAlignLayout` → `FMX.Types`, `TAlphaColors`/`TFontStyle` → `System.UITypes`; `TRectF`/`PointF` → `System.Types`.
 - **Bracket bulk changes** with `BeginUpdate` / `EndUpdate` where the class has them.
 - Prefer patterns from the reference files (derived from the official demos) over invented approaches.
 
@@ -37,7 +35,7 @@ TMS FNC UI Pack (product id `tms.fnc.uipack`, version 7.3, depends on TMS FNC Co
 5. **Date/time**: `Calendar.SelectedDate` is a read-only function (`SelectADate` replaces the selection). `DatePicker.SelectedDate` is writable. The pickers raise `OnDateSelected` / `OnDateTimeChanged` / `OnTimeSelected`, not `OnChange`.
 6. **RichEditor**: `LoadFromFile` reads only the native format; RTF and HTML go through `TTMSFNCRichEditorRTFIO` / `TTMSFNCRichEditorHTMLIO`. There's no `Lines`, `SelAttributes` or `Paragraph`; use `AddText`/`AddLineBreak` and the `SetSelection*` methods. In `SelectText(FromChar, ALength)` a line break counts as 2 characters. Print with `TTMSFNCRichEditorPrintIO`.
 7. **Memo** is Monaco inside a web control: it needs WebView2 on Windows, and anything that runs JavaScript only works after `OnInitialized`. Settings go through `Options`. Save with `Lines.SaveToFile`.
-8. **Mini-HTML** text (HTMLText, captions, items): attribute values are double-quoted; no `<div>`, `<span>`, `<table>` or CSS; use `<br>`. Assigning `OnAnchorClick` replaces `AutoOpenURL`.
+8. **Mini-HTML** text (HTMLText, captions, items): attribute values are double-quoted; no `<div>`, `<span>`, `<table>` or CSS; use `<br>`. Assigning `OnAnchorClick` replaces `AutoOpenURL`. A literal `&` must be written `&&` (VCL and FMX, in HTMLText, TableView, TreeView and other FNC text): a single `&` is a hotkey prefix, so `R&D` loses the `&`, and `&amp;` shows as `amp;`.
 9. **Lists and Kanban**: each list has its own item class and prefix (`l*` ListBox, `tv*` TableView, `tl*` TileList). TileList items use `Title`/`Description`. Templates are `<#NAME>` in TableView/Kanban but `(#NAME)` in ResponsiveList. Kanban drag/drop is off until `Interaction.DragDropMode := kbdmMove`. Item colours need `UseDefaultAppearance := False`. `MoveItem` frees the original item.
 10. **Inputs**: SpinEdit uses `Min`/`Max`/`Value`/`Interaction.Frequency`, not `MinValue`/`Increment`. TrackBar uses `Value`, not `Position`. ProgressBar uses `Minimum`/`Maximum` and has no marquee mode (use TTMSFNCWaitingIndicator). TTMSFNCSpinner is a value wheel, not a busy indicator. Qualify `TTMSFNCCustomComboBoxStyle.csDropDownList`.
 11. **Pickers/selectors** created in code are empty until `InitializeDefault`. Use `SelectedColor`/`OnColorSelected` style names, not `Color`/`OnChange`. On CheckGroupPicker set `Value` (bitmask) or `SelectedItems`.
@@ -45,10 +43,11 @@ TMS FNC UI Pack (product id `tms.fnc.uipack`, version 7.3, depends on TMS FNC Co
 13. **Dialogs**: results arrive asynchronously on WEB (and for TaskDialog on FMX mobile). TaskDialog custom buttons return 100+i. Find/Replace dialogs don't search; you search in `OnFind`. `Chat.AddMessage` triggers the send event unless `ATriggerSendEvent = False`.
 14. **SpreadGrid**: `Cells` holds the formula; read results from `CalcValues` after `Recalc`. Use `;` as argument separator. There's no `IF` and no `<`/`>`/`=` operators (`LT`/`ST`/`EQ`/`CHOOSE`).
 15. **TTMSFNCGrid** is the older grid. Maintain existing code with it, but write new code with TTMSFNCDataGrid (mapping table in `spreadgrid-and-legacy-grid.md`).
+16. **Look on VCL**: FNC controls are opaque windows, so `Fill.Kind := gfkNone` shows white, not the parent; use a solid fill in the parent colour. Badge fills default to a gradient (set `Fill.Kind := gfkSolid`). A style load overwrites earlier customisation. See `dashboards.md`.
 
 ## Reference files
 
-Read the file(s) for the task at hand. Don't load all of them.
+How to read them (saves most of the tokens and time): line 2 of every file is a section map, `> Sections (line ranges): 6-26 Units · 27-58 ...`. Read the first 2 lines, then only the line ranges you need (Read with offset/limit, `sed -n '27,58p'`, or `Get-Content f | Select-Object -Skip 26 -First 32`), plus the last section ("Does not exist / common mistakes") when you write code for that control. Every command is another full model round trip, so batch: read the maps of all files you need in one command, then all needed ranges in one or two commands (keep each output under ~40 KB). Never dump whole files: long outputs get truncated and re-read.
 
 | File | Covers |
 |---|---|
@@ -68,6 +67,7 @@ Read the file(s) for the task at hand. Don't load all of them.
 | `references/containers-and-navigation.md` | Panel, PageControl, TabSet, NavigationPanel, PageSlider, Ribbon, ToolBar(s), StatusBar, Splitter, TrayIcon |
 | `references/dialogs-and-misc.md` | TaskDialog, FontDialog, Find/Replace, FilterView, filter dialogs, ObjectInspector, Chat |
 | `references/spreadgrid-and-legacy-grid.md` | SpreadGrid formulas and math libs, the older TTMSFNCGrid and its companions, TTMSFNCGrid → TTMSFNCDataGrid mapping |
+| `references/dashboards.md` | Building a styled dashboard: which control for which piece, KPI cards and charts drawn with `TTMSFNCGraphics`, flat/opaque styling traps on VCL, style-loading order, snapshot and PDF. Read this first for any dashboard, admin overview or "make it look good" task |
 
 ## Related skills
 

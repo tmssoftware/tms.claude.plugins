@@ -1,4 +1,5 @@
 # Buttons, toggles, sliders and indicators (TTMSFNCButton, TTMSFNCCheckBox, TTMSFNCRadioButton, TTMSFNCCheckGroup, TTMSFNCRadioGroup, TTMSFNCSwitch, TTMSFNCTrackBar, TTMSFNCRangeSlider, TTMSFNCProgressBar, TTMSFNCRating, TTMSFNCBadge, TTMSFNCSpinner, TTMSFNCWaitingIndicator)
+> Sections (line ranges): 6-21 Units, palette, platforms · 22-37 TTMSFNCButton · 38-64 TTMSFNCCheckBox / TTMSFNCRadioButton · 65-99 TTMSFNCCheckGroup / TTMSFNCRadioGroup · 100-123 TTMSFNCSwitch · 124-161 TTMSFNCTrackBar / TTMSFNCRangeSlider · 162-188 TTMSFNCProgressBar / TTMSFNCRating · 189-202 TTMSFNCBadge · 203-220 TTMSFNCSpinner · 221-232 TTMSFNCWaitingIndicator · 233-238 Platform notes · 239-255 Does not exist / common mistakes
 
 Verified against TMS FNC UI Pack 7.3.1.2 source: `*.TMSFNCButton`, `*.TMSFNCHTMLImageContainer`, `*.TMSFNCCheckBox`, `*.TMSFNCRadioButton`, `*.TMSFNCCustomGroup`, `*.TMSFNCCheckGroup`, `*.TMSFNCRadioGroup`, `*.TMSFNCSwitch`, `*.TMSFNCTrackBar`, `*.TMSFNCRangeSlider`, `*.TMSFNCProgressBar`, `*.TMSFNCBadge`, `*.TMSFNCSpinner`, `*.TMSFNCWaitingIndicator` (+ FNC Core 4.5.0.0).
 
@@ -193,9 +194,11 @@ bd := TTMSFNCBadge.Create(Self);
 bd.Parent := Button1.Parent;
 bd.Control := Button1;
 bd.Text := '3';
+bd.Appearance.Fill.Kind := gfkSolid;   // default is a red gradient: Color alone keeps the gradient look
 bd.Appearance.Fill.Color := gcRed;
 bd.Appearance.Font.Color := gcWhite;
 ```
+Free-standing status chip (no `Control`): `AutoSize := False; HorizontalPosition := bhpCustom; VerticalPosition := bvpCustom; SetBounds(...)`, then the solid fill above with `Appearance.Stroke.Kind := gskNone`.
 
 ## TTMSFNCSpinner (value wheel)
 

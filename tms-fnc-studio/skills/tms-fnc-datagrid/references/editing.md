@@ -1,4 +1,5 @@
 # TMS FNC DataGrid – editing, AutoFill, clipboard
+> Sections (line ranges): 8-66 Enabling editing · 67-165 Editor types · 166-209 Edit lifecycle and validation · 210-270 AutoFill · 271-299 Clipboard · 300-315 Does not exist / common mistakes
 
 Verified against `*.TMSFNCDataGridRenderer.pas`, `*.TMSFNCDataGrid.pas`, `*.TMSFNCDataGridData.pas`
 and the Basic `Editing` and `AutoFill` demos (VCL/FMX/WEB). Units: see core-api.md.
